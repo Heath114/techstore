@@ -1,9 +1,14 @@
-import Header from '../../components/Header';
+import Header from '@/components/Header';
+import HeroSlider from '@/components/HeroSlider';
+import Products from '@/components/Products';
 
 export default function Page() {
   return (
     <>
-      <h1>hello</h1>
+      <Header />
+      <HeroSlider />
+      <Products />
+      <div className="h-[300vh]"></div>
     </>
   );
 }

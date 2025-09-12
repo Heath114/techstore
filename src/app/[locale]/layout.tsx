@@ -1,6 +1,41 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import localFont from 'next/font/local'
 
+// Load your complete Quanslim font family as the global font
+const quanslimFont = localFont({
+  src: [
+    {
+      // path to files in the project filesystem (public/fonts)
+      path: '../../../public/fonts/fonnts.com-quanslimr-thin.otf',
+      weight: '100',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/fonnts.com-quanslimr-light.otf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/fonnts.com-quanslim-semilight.otf',
+      weight: '350',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/fonnts.com-quanslimr-regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/fonnts.com-quanslimr-lightitalic.otf',
+      weight: '300',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-quanslim',
+  display: 'swap',
+  fallback: ['system-ui', 'Arial', 'sans-serif'],
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,8 +48,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+    <html lang="en" className={quanslimFont.variable} suppressHydrationWarning>
+      <body className={quanslimFont.className} suppressHydrationWarning>
         {children}
       </body>
     </html>
