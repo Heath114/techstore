@@ -1,5 +1,5 @@
+// next.config.ts
 import type { NextConfig } from "next";
-
 
 import path from "path";
 

@@ -1,9 +1,13 @@
+// Relative path: /src/components/HeroSlider.tsx
 'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
+import React from 'react';
+import { ItemList } from '@/app/data/items';
+import { useRouter } from 'next/navigation';
 
 
 type Slide = {
@@ -39,7 +43,7 @@ const slides: Slide[] = [
   },
   {
     id: 3,
-    title: 'Travel-Ready',
+    title: 'browse on the go',
     subtitle:
       'Compact design that fits anywhere without compromising performance.',
     ctaText: 'See details',
@@ -59,13 +63,12 @@ const slides: Slide[] = [
   }
 ];
 
-export default function ProHeroSlider() {
+function ProHeroSlider() {
   return (
-    <section className="px-4 sm:px-6 py-6 sm:py-10 lg:py-16 xl:py-32 w-[90%] mx-auto">
-      <div className="relative rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.12)]">
+    <section className=" pt-24 w-[75%] mx-auto mb-6" id="home">
+      <div className="relative rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.12)] cursor-pointer">
         <Swiper
           modules={[Autoplay, Pagination, Navigation, EffectFade]}
-          effect="fade"
           fadeEffect={{ crossFade: true }}
           loop
           speed={900}
@@ -90,7 +93,7 @@ export default function ProHeroSlider() {
 
                 {/* Content */}
                 <div className="absolute inset-0 flex items-center">
-                  <div className="max-w-7xl mx-auto w-full px-6 lg:px-10">
+                  <div className="max-w-7xl mx-auto w-full px-8">
                     <div className="max-w-xl">
                       <h2 className="text-white text-1xl sm:text-2xl lg:text-5xl font-semibold tracking-tight">
                         {s.title}
@@ -101,7 +104,7 @@ export default function ProHeroSlider() {
                       {s.ctaText && s.ctaHref && (
                         <Link
                           href={s.ctaHref}
-                          className="inline-flex mt-5 items-center rounded-lg bg-white/90 hover:bg-white transition px-15 py-2.5 text-3xl font-medium text-gray-900 backdrop-blur"
+                          className="inline-flex mt-5 items-center rounded-lg bg-white/90 hover:bg-white transition px-12 py-2.5 text-3xl font-medium text-gray-900 backdrop-blur"
                         >
                           {s.ctaText}
                         </Link>
@@ -113,9 +116,42 @@ export default function ProHeroSlider() {
             </SwiperSlide>
           ))}
         </Swiper>
-
         <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/10" />
       </div>
     </section>
   );
 }
+
+
+export default function Hero() {
+  return (
+    <>
+      <ProHeroSlider />
+      <ItemsSection />
+    </>
+  )
+}
+
+
+function ItemsSection() {
+  const router = useRouter();
+
+  return (
+    <div className="flex items-start gap-16 py-4 w-[75%] mx-auto mb-8 py-4 bg-white rounded-lg shadow-lg">
+      {ItemList.map((item) => (
+        <div key={item.id} className="flex-1 cursor-pointer">
+          <Image
+            src={item.image}
+            alt={item.name}
+            width={80}
+            height={80}
+            className="object-contain bg-[#f1edfc] rounded-lg mx-auto w-24 h-24"
+            onClick={() => router.push(item.link || '/')}
+          />
+          <p className="text-center mt-2 text-gray-900 text-xl">{item.name}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+

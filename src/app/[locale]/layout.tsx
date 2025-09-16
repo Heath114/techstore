@@ -1,6 +1,9 @@
+// Relative path: /src/app/[locale]/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from 'next/font/local'
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 // Load your complete Quanslim font family as the global font
 const quanslimFont = localFont({
@@ -50,7 +53,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={quanslimFont.variable} suppressHydrationWarning>
       <body className={quanslimFont.className} suppressHydrationWarning>
-        {children}
+        <Header />
+        <div className="min-h-[calc(100vh)] py-10">{children}</div>
+        <Footer />
       </body>
     </html>
   );
