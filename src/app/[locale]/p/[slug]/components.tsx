@@ -32,11 +32,10 @@ export const StarRating = ({ rating, reviews }: { rating: number; reviews: numbe
 
 // Product Information section
 export function ProductInfo({ product }: { product: Product }) {
-  const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '9627XXXXXXX';
 
   return (
-    <div className="flex h-full flex-col justify-center">
-      <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{product.name}</h1>
+    <div className="flex h-full flex-col">
+      <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">{product.name}</h1>
       <p className="mt-4 text-slate-600 text-xl">{product.description}</p>
       
       <div className="mt-6 flex items-center gap-6 border-y border-slate-200 py-4">
@@ -53,6 +52,7 @@ export function ProductInfo({ product }: { product: Product }) {
       <p className="mt-6 text-4xl font-bold text-green-600">${product.price.toFixed(2)}</p>
 
       <ContactButtons productName={product.name} />
+      
     </div>
   );
 }

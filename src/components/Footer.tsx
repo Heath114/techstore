@@ -240,7 +240,7 @@ const FooterBottom = () => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <img src="/images/icons/instagram.png" alt="Instagram" className="w-4 h-4 sm:w-5 sm:h-5 lg:w-16 lg:h-16" />
+            <img src="/images/icons/instagram.png" alt="Instagram" className="w-4 h-4 sm:w-5 sm:h-5 lg:w-10 lg:h-10" />
           </Link>
           <Link
             href="https://www.facebook.com/profile.php?id=100064126295491"
@@ -248,7 +248,7 @@ const FooterBottom = () => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <img src="/images/icons/facebook.png" alt="Facebook" className="w-4 h-4 sm:w-5 sm:h-5 lg:w-16 lg:h-16" />
+            <img src="/images/icons/facebook.png" alt="Facebook" className="w-4 h-4 sm:w-5 sm:h-5 lg:w-10 lg:h-10" />
           </Link>
         </div>
       </div>
