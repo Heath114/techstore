@@ -35,21 +35,28 @@ export function ProductInfo({ product }: { product: Product }) {
 
   return (
     <div className="flex h-full flex-col">
-      <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">{product.name}</h1>
-      <p className="mt-4 text-slate-600 text-xl">{product.description}</p>
+      <h1 className="text-4xl font-serif text-gray-900 leading-tight mb-4">{product.name}</h1>
       
-      <div className="mt-6 flex items-center gap-6 border-y border-slate-200 py-4">
-        <div className="flex items-center gap-2">
-            <ShieldCheckIcon className="h-6 w-6 text-green-500" />
-            <span className="text-lg font-medium text-slate-600">Premium Quality</span>
-        </div>
-        <div className="flex items-center gap-2">
-            <TruckIcon className="h-6 w-6 text-green-500" />
-            <span className="text-lg font-medium text-slate-600">Fast Shipping</span>
+      <div className="mb-8 py-2 border-b border-gray-100">
+        <p className="text-4xl font-medium text-gray-900 mb-3">{`${product.price.toFixed(2)} JOD `}</p>
+        <div className="inline-flex items-center gap-2">
+          <div className={`w-3 h-3 rounded-full ${product.inStock !== false ? 'bg-green-500 ring-2 ring-gray-200 ' : 'bg-red-500'}`} />
+          <span className="text-xl text-gray-700 font-medium">
+            {product.inStock !== false ? 'In stock' : 'Out of stock'}
+          </span>
         </div>
       </div>
 
-      <p className="mt-6 text-4xl font-bold text-green-600">${product.price.toFixed(2)}</p>
+      <div className="mb-8">
+        <div className="flex items-center gap-3">
+            <ShieldCheckIcon className="h-5 w-5 text-gray-400" />
+            <span className="text-base text-gray-700">Guaranteed authentic</span>
+        </div>
+        <div className="flex items-center gap-3">
+            <TruckIcon className="h-5 w-5 text-gray-400" />
+            <span className="text-base text-gray-700">Free shipping nationwide</span>
+        </div>
+      </div>
 
       <ContactButtons productName={product.name} />
       

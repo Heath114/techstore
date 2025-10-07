@@ -51,7 +51,7 @@ export function ContactButtons({ productName }: ContactButtonsProps) {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex w-full text-2xl items-center justify-center gap-3 rounded-lg bg-green-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+        className="flex w-full text-2xl items-center justify-center gap-3 bg-green-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
       >
         <Image src="/images/icons/whatsapp.png" alt="WhatsApp" width={512} height={512} className="h-10 w-10" />
         Order Now on WhatsApp
