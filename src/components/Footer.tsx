@@ -9,22 +9,22 @@ import { db } from '@/lib/firebase';
 
 function AboveFooter() {
   return (
-    <section className="flex flex-col bg-gray-900 py-8 px-8 md:px-40 border-b border-gray-700" id="contact">
-      <div className="flex justify-between">
-        <div className="flex flex-col">
-          <h1 className="text-3xl font-bold">Contact Us</h1>
-          <p className="text-2xl text-white">You can call us any time.</p>
+    <section className="flex flex-col bg-gray-900 py-12 px-8 md:px-40 border-b border-gray-800" id="contact">
+      <div className="flex justify-between items-center">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-medium text-white">Contact Us</h1>
+          <p className="text-base text-gray-400">You can call us any time.</p>
         </div>
-        <div className="flex items-end gap-2 ">
+        <div className="flex items-end gap-4">
           <button
-            className="bg-lavender text-xl py-2 px-8 rounded hover:text-blue-600 text-blue-400 cursor-pointer"
+            className="bg-white text-base font-medium py-3 px-6 rounded-md hover:bg-gray-100 text-gray-900 cursor-pointer transition-colors duration-300"
             onClick={() => window.open('https://www.google.com/maps', '_blank')}>
-              <Map className="inline mr-2"/> Get Directions
+              <Map className="inline mr-2 w-4 h-4"/> Get Directions
           </button>
           <button
-            className="bg-lavender text-xl py-2 px-8 rounded hover:text-blue-600 text-blue-400 cursor-pointer"
+            className="bg-white text-base font-medium py-3 px-6 rounded-md hover:bg-gray-100 text-gray-900 cursor-pointer transition-colors duration-300"
             onClick={() => window.open('tel:203997333333')}>
-              <Phone className="inline mr-2"/> Make a Call
+              <Phone className="inline mr-2 w-4 h-4"/> Make a Call
           </button>
         </div>
       </div>
@@ -59,44 +59,44 @@ const FooterNav = () => {
   const currentLang = lang === 'ar' ? 'ar' : 'en';
 
   return (
-    <div className={`flex items-start justify-between flex-row px-8`}>
-      <div className={`flex flex-col gap-4`}>
-        <h3 className={`mb-2 sm:mb-4 uppercase text-gray-400 font-semibold lg:text-4xl`}>
+    <div className={`flex items-start justify-between flex-row px-8 gap-12`}>
+      <div className={`flex flex-col gap-3`}>
+        <h3 className={`mb-3 uppercase text-gray-500 font-medium text-sm tracking-wider`}>
           Contact Us 
         </h3>
-        <div className={`flex gap-2 items-center`}>
-          <Phone className="text-gray-400" />
-          <p className="text-2xl px-4 hover:underline cursor-pointer" onClick={() => window.open('tel:203997333333')}>203997333333</p>
+        <div className={`flex gap-3 items-center`}>
+          <Phone className="text-gray-500 w-4 h-4" />
+          <p className="text-base text-white hover:text-gray-300 cursor-pointer transition-colors duration-300" onClick={() => window.open('tel:203997333333')}>203997333333</p>
         </div>
-        <div className={`flex gap-2 items-center`}>
-          <Mail className="text-gray-400" />
-          <p className="text-2xl px-4 hover:underline cursor-pointer" onClick={() => window.open('mailto:info@example.com')}>info@example.com</p>
+        <div className={`flex gap-3 items-center`}>
+          <Mail className="text-gray-500 w-4 h-4" />
+          <p className="text-base text-white hover:text-gray-300 cursor-pointer transition-colors duration-300" onClick={() => window.open('mailto:info@example.com')}>info@example.com</p>
         </div>
-        <div className={`flex gap-2 items-center`}>
-          <Map className="text-gray-400" />
-          <p className="text-2xl px-4 hover:underline cursor-pointer" onClick={() => window.open('https://www.google.com/maps', '_blank')}>123 Main St, Anytown, USA</p>
+        <div className={`flex gap-3 items-center`}>
+          <Map className="text-gray-500 w-4 h-4" />
+          <p className="text-base text-white hover:text-gray-300 cursor-pointer transition-colors duration-300" onClick={() => window.open('https://www.google.com/maps', '_blank')}>123 Main St, Anytown, USA</p>
         </div>
       </div>
 
       <div className={`flex flex-col gap-3`}>
-        <h3 className={`mb-2 sm:mb-4 uppercase text-gray-400 font-semibold lg:text-4xl ${lang === 'ar' ? 'text-base sm:text-lg' : 'text-base'}`}>
+        <h3 className={`mb-3 uppercase text-gray-500 font-medium text-sm tracking-wider`}>
           Quick Links
         </h3>
         <div className={`flex gap-2 items-center`}>
-          <Link href="#home" className="text-2xl px-4 hover:underline">- Home</Link>
+          <Link href="#home" className="text-base text-white hover:text-gray-300 transition-colors duration-300">Home</Link>
         </div>
         <div className={`flex gap-2 items-center`}>
-          <Link href="#deals" className="text-2xl px-4 hover:underline">- Deals</Link>
+          <Link href="#deals" className="text-base text-white hover:text-gray-300 transition-colors duration-300">Deals</Link>
         </div>
         <div className={`flex gap-2 items-center`}>
-          <Link href="#contact" className="text-2xl px-4 hover:underline">- Contact</Link>
+          <Link href="#contact" className="text-base text-white hover:text-gray-300 transition-colors duration-300">Contact</Link>
         </div>
       </div>
 
       <NumberInputComponent />
       
       <div className={`flex flex-col gap-3`}>
-        <h3 className={`mb-2 sm:mb-4 uppercase text-gray-400 font-semibold lg:text-4xl ${lang === 'ar' ? 'text-base sm:text-lg' : 'text-base'}`}>
+        <h3 className={`mb-3 uppercase text-gray-500 font-medium text-sm tracking-wider`}>
           Opening Hours
         </h3>
         <p className="text-2xl px-4">Mon-Fri: 9am - 6pm</p>

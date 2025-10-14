@@ -35,7 +35,7 @@ export function ProductInfo({ product }: { product: Product }) {
 
   return (
     <div className="flex h-full flex-col">
-      <h1 className="text-4xl font-serif text-gray-900 leading-tight mb-4">{product.name}</h1>
+      <h1 className="text-4xl text-gray-900 leading-tight mb-4">{product.name}</h1>
       
       <div className="mb-8 py-2 border-b border-gray-100">
         <p className="text-4xl font-medium text-gray-900 mb-3">{`${product.price.toFixed(2)} JOD `}</p>
@@ -45,7 +45,7 @@ export function ProductInfo({ product }: { product: Product }) {
             {product.inStock !== false ? 'In stock' : 'Out of stock'}
           </span>
         </div>
-      </div>
+      </div>f
 
       <div className="mb-8">
         <div className="flex items-center gap-3">

@@ -86,7 +86,7 @@ export const ProductList: Product[] = [
     },
     {
         id: 3,
-        name: "Wireless Mouse",
+        name: "v Mouse",
         description: "A highprecision wireless mouse with ergonomic design.",
         image: "/images/products/img1.jpg",
         brand: "Logitech",
@@ -95,24 +95,42 @@ export const ProductList: Product[] = [
         features: [
             "Ergonomic Design",
             "Adjustable DPI",
+            "Customizable Buttons",
+            "Long Battery Life",
+            "Smooth Tracking",
+            "Compact and Portable",
+            "Lightweight Design",
+            "Easy Setup"
+
         ],
         specifications: {
             Connectivity: "Wireless 2.4GHz",
             Battery: "AA Battery (included)",
             Compatibility: "Windows, macOS, Linux",
             Weight: "100g",
-            Dimensions: "4.5 x 2.5 x 1.5 inches"
+            Dimensions: "4.5 x 2.5 x 1.5 inches",
+            display: "6.55 inch, 120Hz AMOLED",
+            Processor: "Qualcomm Snapdragon 888",
+            RAM: "8GB / 12GB",
+            Storage: "128GB / 256GB",
+            OS: "OxygenOS based on Android 11",
+            Cameras: "48MP + 50MP + 2MP Rear, 16MP Front",
+
         },
         warranty: "2 Year Manufacturer Warranty",
         whatsInTheBox: [
             "Wireless Mouse",
             "USB Receiver",
             "AA Battery",
-            "User Manual"
+            "User Manual",
+            "Warp Charge 65 Power Adapter",
+            "USB Type-C Cable",
+            "Quick Start Guide"
+
         ],
-        price: 29.99,
-        images: ["/images/products/img2.jpg", "/images/products/img3.jpg", "/images/products/img1.jpg", "/images/products/placeholder.png"],
-        slug: "wireless-mouse"
+        price: 1292.99,
+        images: ["/images/products/img2.jpg", "/images/products/img2.jpg", "/images/products/img3.jpg", "/images/products/img1.jpg", "/images/products/placeholder.png"],
+        slug: "bwadwd"
     },
     {
         id: 4,

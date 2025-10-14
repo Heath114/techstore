@@ -28,13 +28,10 @@ export default function ProductsSection() {
          return null;
     }
 
-    const handleProductClick = (productSlug: string) => {
-        router.push(`/${lang}/p/${productSlug}`);
-    }
     return (
-        <section className="px-4 sm:px-6 lg:px-8 lg:py-8 py-6 sm:py-10 bg-white w-[75%] mx-auto rounded-lg" id="deals">
+        <section className="px-4 sm:px-6 lg:px-8 py-16 bg-white w-[75%] mx-auto rounded-lg" id="deals">
             <div className="max-w-8xl mx-auto">
-                <h2 className="text-3xl font-semilight text-gray-600 mb-6">Our choice to you</h2>
+                <h2 className="text-3xl font-medium text-gray-900 mb-12 tracking-wide">Our choice to you</h2>
                 <div className="relative">
                     <Swiper
                         modules={[Autoplay, Pagination, Navigation]}
@@ -69,10 +66,10 @@ export default function ProductsSection() {
                         {ProductList?.map((product) => (
                             <SwiperSlide key={product.id}>
                                 <div
-                                    className="border hover:border-red-900 rounded-lg shadow hover:shadow-lg cursor-pointer group h-full flex flex-col"
+                                    className="border border-gray-200 rounded-lg hover:shadow-lg cursor-pointer group h-full flex flex-col transition-all duration-300 hover:border-gray-400"
                                     onClick={() => router.push(`/${lang}/p/${product.slug}`)}
                                 >
-                                    <div className="relative overflow-hidden rounded-lg mb-4 border border-transparent  transition-colors duration-300">
+                                    <div className="relative overflow-hidden rounded-t-lg mb-4">
                                         <Image
                                             src={product.image ?? '/images/products/placeholder.png'}
                                             alt={product.name}
@@ -81,13 +78,12 @@ export default function ProductsSection() {
                                             className="w-full h-48 object-contain"
                                         />
                                     </div>
-                                    <div className="flex-grow flex flex-col justify-between">
-                                        <h3 className="text-2xl text-gray-800 mb-2 line-clamp-2 px-2 group-hover:text-blue-600 transition-colors text-center ">
+                                    <div className="flex-grow flex flex-col justify-between px-4 pb-4">
+                                        <h3 className="text-base text-gray-900 mb-3 line-clamp-2 group-hover:text-gray-600 transition-colors text-center">
                                             {product.name}
                                         </h3>
                                         <div className="mt-auto">
-                                         
-                                            <button className="w-full bg-gray-100 font-bold text-green-700 text-2xl py-2 px-4 rounded-md transition-colors duration-200">
+                                            <button className="w-full bg-gray-50 font-medium text-gray-900 text-base py-2 px-4 rounded-md hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
                                                 {product.price.toFixed(2)} JOD
                                             </button>
                                         </div>

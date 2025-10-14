@@ -15,8 +15,8 @@ export default function Header() {
 
   return (
     // The header is fixed to the top of the viewport.
-    <header className="bg-white shadow fixed w-full z-50 top-0 left-0">
-      <div className="flex justify-between items-center p-4 px-8">
+    <header className="bg-white fixed w-full z-50 top-0 left-0 border-b border-gray-200">
+      <div className="flex justify-between items-center py-4 px-8">
         <div className="flex-shrink-0">
           <Link href="/">
             <Image 
@@ -54,18 +54,18 @@ function SearchBar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search products..."
-        className="w-full border text-black border-gray-300 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full border text-gray-900 border-gray-200 bg-white rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-300"
       />
       {query && results.length > 0 && (
-        <div className="absolute top-full left-0 right-0 bg-white text-black border border-gray-300 rounded-md mt-1 max-h-60 overflow-y-auto z-10 shadow-lg">
+        <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md mt-1 max-h-60 overflow-y-auto z-10 shadow-lg">
           {results.map((product) => (
             <Link
               key={product.id}
               href={`/${lang}/p/${product.slug}`}
               onClick={() => setQuery('')} 
-              className="block" // Make the entire card clickable
+              className="block"
             >
-              <div className="flex items-center p-3 border-b border-gray-200 hover:bg-gray-100 transition-colors">
+              <div className="flex items-center p-3 border-b border-gray-200 hover:bg-gray-50 transition-colors duration-300">
                 <div className="flex-shrink-0 w-12 h-12 mr-3">
                   <Image
                     src={product.image || '/images/products/placeholder.png'}
@@ -76,15 +76,15 @@ function SearchBar() {
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-xl font-medium text-gray-900 truncate">
+                  <div className="text-base font-medium text-gray-900 truncate">
                     {product.name}
                   </div>
-                  <div className="text-lg text-gray-500 truncate">
+                  <div className="text-sm text-gray-600 truncate">
                     {product.brand}
                   </div>
                 </div>
                 <div className="flex-shrink-0 ml-2">
-                  <ChevronRight className="text-gray-800" size={20} />
+                  <ChevronRight className="text-gray-400" size={20} />
                 </div>
               </div>
             </Link>

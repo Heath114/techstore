@@ -4,40 +4,55 @@ import "./globals.css";
 import localFont from 'next/font/local'
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import LenisScroll from '@/components/LenisScroll';
 
-// Load your complete Quanslim font family as the global font
-const quanslimFont = localFont({
+// Load Neue Montreal font family as the global font
+const neueMontrealFont = localFont({
   src: [
     {
-      // path to files in the project filesystem (public/fonts)
-      path: '../../../public/fonts/fonnts.com-quanslimr-thin.otf',
-      weight: '100',
-      style: 'normal',
-    },
-    {
-      path: '../../../public/fonts/fonnts.com-quanslimr-light.otf',
+      path: '../../../public/fonts/NeueMontreal-Light.otf',
       weight: '300',
       style: 'normal',
     },
     {
-      path: '../../../public/fonts/fonnts.com-quanslim-semilight.otf',
-      weight: '350',
-      style: 'normal',
+      path: '../../../public/fonts/NeueMontreal-LightItalic.otf',
+      weight: '300',
+      style: 'italic',
     },
     {
-      path: '../../../public/fonts/fonnts.com-quanslimr-regular.otf',
+      path: '../../../public/fonts/NeueMontreal-Regular.otf',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../../../public/fonts/fonnts.com-quanslimr-lightitalic.otf',
-      weight: '300',
+      path: '../../../public/fonts/NeueMontreal-Italic.otf',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../../../public/fonts/NeueMontreal-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/NeueMontreal-MediumItalic.otf',
+      weight: '500',
+      style: 'italic',
+    },
+    {
+      path: '../../../public/fonts/NeueMontreal-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../../public/fonts/NeueMontreal-BoldItalic.otf',
+      weight: '700',
       style: 'italic',
     },
   ],
-  variable: '--font-quanslim',
+  variable: '--font-neue-montreal',
   display: 'swap',
-  fallback: ['system-ui', 'Arial', 'sans-serif'],
+  fallback: ['system-ui', '-apple-system', 'sans-serif'],
 })
 
 export const metadata: Metadata = {
@@ -51,10 +66,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={quanslimFont.variable} suppressHydrationWarning>
-      <body className={quanslimFont.className} suppressHydrationWarning>
+    <html lang="en" className={neueMontrealFont.variable} suppressHydrationWarning>
+      <body className={neueMontrealFont.className} suppressHydrationWarning>
+        <LenisScroll />
         <Header />
-        <div className="min-h-[calc(100vh)] py-10">{children}</div>
+        <div className="min-h-[calc(100vh)]">{children}</div>
         <Footer />
       </body>
     </html>
