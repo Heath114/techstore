@@ -2,6 +2,7 @@
 'use client';
 
 import { ProductList } from '@/app/data/products';
+import { getProductPrice } from '@/app/data/products';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation';
@@ -16,12 +17,14 @@ import 'swiper/css/navigation';
 
 export default function ProductsSection() {
     const [mounted, setMounted] = React.useState(false);
+    const [disableSwiper, setDisableSwiper] = React.useState(false);
     const router = useRouter();
     const params = useParams();
     const lang = params?.locale as string || 'en';
     
     React.useEffect(() => {
         setMounted(true);
+        setDisableSwiper(true);
     }, []);
 
     if (!mounted) {
@@ -29,34 +32,39 @@ export default function ProductsSection() {
     }
 
     return (
-        <section className="px-4 sm:px-6 lg:px-8 py-16 bg-white w-[75%] mx-auto rounded-lg" id="deals">
-            <div className="max-w-8xl mx-auto">
-                <h2 className="text-3xl font-medium text-gray-900 mb-12 tracking-wide">Our choice to you</h2>
+        <section className="w-full max-w-[1440px] mx-auto lg:px-0 px-4 py-16 bg-white"
+ id="deals">
+            <div className="">
+                <h3 className="text-[32px] font-medium text-gray-900 mb-12 tracking-wide">BESTSELLERS</h3>
                 <div className="relative">
                     <Swiper
                         modules={[Autoplay, Pagination, Navigation]}
-                        spaceBetween={20}
-                        slidesPerView={1}
+                        spaceBetween={10}
+                        slidesPerView={1.6}
+                        slidesPerGroup={1}
+                        centeredSlides={false}
                         breakpoints={{
                             640: {
                                 slidesPerView: 2,
-                                spaceBetween: 20,
+                                spaceBetween: 2,
                             },
                             768: {
                                 slidesPerView: 3,
-                                spaceBetween: 24,
+                                spaceBetween: 2,
                             },
-                            1024: {
+                            1025: {
                                 slidesPerView: 4,
-                                spaceBetween: 24,
-                            },
-                            1280: {
-                                slidesPerView: 5,
-                                spaceBetween: 24,
-                            },
+                                slidesOffsetAfter: 0,
+                                slidesOffsetBefore: 0,
+                                spaceBetween: 2,
+                            }
+                        }}
+                        pagination={{
+                            type: "progressbar",
+                            el: ".pro-pagination",
                         }}
                         autoplay={{
-                            delay: 4000,
+                            delay: 2000,
                             disableOnInteraction: false,
                         }}
                       
@@ -66,32 +74,46 @@ export default function ProductsSection() {
                         {ProductList?.map((product) => (
                             <SwiperSlide key={product.id}>
                                 <div
-                                    className="border border-gray-200 rounded-lg hover:shadow-lg cursor-pointer group h-full flex flex-col transition-all duration-300 hover:border-gray-400"
+                                    className=" hover:shadow-md
+                                     cursor-pointer group flex flex-col transition-all duration-300
+                                      h-full w-full border-r border-neutral-200 last:border-r-0"
                                     onClick={() => router.push(`/${lang}/p/${product.slug}`)}
                                 >
-                                    <div className="relative overflow-hidden rounded-t-lg mb-4">
+                                <div className="aspect-[4/5] w-full bg-gray-50 flex items-center justify-center overflow-hidden mb-2">
                                         <Image
                                             src={product.image ?? '/images/products/placeholder.png'}
                                             alt={product.name}
-                                            width={200}
-                                            height={200}
-                                            className="w-full h-48 object-contain"
+                                            width={500}
+                                            height={600}
+                                            className="w-full h-full object-contain"
                                         />
+                                        {
+                                            product.isSale && (
+                                                <div className="absolute top-2 left-2 bg-red-700 text-white px-[8px] py-[2px] text-[10px]">
+                                                    ON SALE
+                                                </div>
+                                            )
+                                        }
                                     </div>
-                                    <div className="flex-grow flex flex-col justify-between px-4 pb-4">
-                                        <h3 className="text-base text-gray-900 mb-3 line-clamp-2 group-hover:text-gray-600 transition-colors text-center">
-                                            {product.name}
-                                        </h3>
-                                        <div className="mt-auto">
-                                            <button className="w-full bg-gray-50 font-medium text-gray-900 text-base py-2 px-4 rounded-md hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
-                                                {product.price.toFixed(2)} JOD
-                                            </button>
+                                    <div className="text-black font-normal px-2">
+                                        <h4 className="text-base text-gray-700 font-normal">{product.name}</h4>
+                                        <div className="mt-2">
+                                            {product.isSale ? (
+                                                <>
+                                                    <span className="text-sm text-gray-300 line-through">{`$${(product.originalPrice).toFixed(2)}`}</span>
+                                                    <span className="text-sm text-black text-gray-700 ml-2">{`From $${getProductPrice(product).toFixed(2)}`}</span>
+                                                </>
+                                            ) :
+                                            (
+                                                <span className="text-sm text-gray-700">{`From $${getProductPrice(product).toFixed(2)}`}</span>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
+                    <div className="pro-pagination swiper-pagination mt-8" />
                 </div>
             </div>
         </section>

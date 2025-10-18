@@ -1,9 +1,8 @@
 // src/app/data/products.ts
-export interface Product {
+interface BaseProduct {
     id: number;
     name: string;
     description?: string;
-    price: number;
     image?: string;
     images: string[];
     inStock?: boolean;
@@ -16,19 +15,33 @@ export interface Product {
     brand?: string;
     warranty?: string;
     colors?: string[];
-    specifications?:{ 
+    specifications?: {
         [key: string]: string
     };
     tags?: string[];
     whatsInTheBox?: string[];
 }
 
+export type Product = BaseProduct & (
+    | { isSale?: false; price: number }
+    | { isSale: true; originalPrice: number; discount: number; price?: number }
+);
+
+// Helper function to get the actual price of a product
+export function getProductPrice(product: Product): number {
+    if (product.isSale) {
+        // If price is provided, use it; otherwise calculate from originalPrice and discount
+        return product.price ?? product.originalPrice * (1 - product.discount / 100);
+    }
+    return product.price;
+}
+
 export const ProductList: Product[] = [
     {
         id: 1,
-        name: "Wireless Mouse",
+        name: "Wirelessww Mouse",
         description: "A highprecision wireless mouse with ergonomic design.",
-        image: "/images/products/img1.jpg",
+        image: "/images/products/1.webp",
         brand: "Logitech",
         category: "Accessories",
         colors: ["Black", "White", "Blue"],
@@ -50,15 +63,17 @@ export const ProductList: Product[] = [
             "AA Battery",
             "User Manual"
         ],
-        price: 29.99,
         images: ["/images/products/img2.jpg", "/images/products/img3.jpg", "/images/products/img1.jpg", "/images/products/placeholder.png"],
-        slug: "wireless-mouse"
+        slug: "wireless-mouse",
+        isSale: true,
+        originalPrice: 29.99,
+        discount: 10,
     },
     {
         id: 2,
         name: "Wireless Mouse",
         description: "A highprecision wireless mouse with ergonomic design.",
-        image: "/images/products/img1.jpg",
+        image: "/images/products/2.webp",
         brand: "Logitech",
         category: "Accessories",
         colors: ["Black", "White", "Blue"],
@@ -80,15 +95,18 @@ export const ProductList: Product[] = [
             "AA Battery",
             "User Manual"
         ],
-        price: 29.99,
+        price: 26.99,
         images: ["/images/products/img2.jpg", "/images/products/img3.jpg", "/images/products/img1.jpg", "/images/products/placeholder.png"],
-        slug: "wireless-mouse"
+        slug: "wireless-mouse",
+        isSale: true,
+        originalPrice: 29.99,
+        discount: 10,
     },
     {
         id: 3,
         name: "v Mouse",
         description: "A highprecision wireless mouse with ergonomic design.",
-        image: "/images/products/img1.jpg",
+        image: "/images/products/3.webp",
         brand: "Logitech",
         category: "Accessories",
         colors: ["Black", "White", "Blue"],
@@ -136,7 +154,7 @@ export const ProductList: Product[] = [
         id: 4,
         name: "Wireless Mouse",
         description: "A highprecision wireless mouse with ergonomic design.",
-        image: "/images/products/img1.jpg",
+        image: "/images/products/4.webp",
         brand: "Logitech",
         category: "Accessories",
         colors: ["Black", "White", "Blue"],

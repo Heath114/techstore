@@ -3,29 +3,63 @@
 import React from 'react';
 import { BrandList } from '@/app/data/brands';
 import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/autoplay';
 
 export default function BrandsSection() {
   return (
-    <div className="flex items-center gap-8 py-12 w-[75%] mx-auto mb-8">
-      <div className="flex-1 border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-        <Image 
-          src="/images/brands/anker.png"
-          alt="Anker"
-          width={400}
-          height={200}
-          className="w-full h-auto object-contain"
-        />
+    <section className="w-full max-w-[1440px] mx-auto lg:px-0 px-4 py-32 bg-white">
+      <div className="mb-12 text-center">
+        <h2 className="text-[32px] font-medium text-gray-900 tracking-wide">
+          Shop from {BrandList.length}+ Trusted Brands
+        </h2>
       </div>
-      <div className="flex-1 border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-        <Image
-          src="/images/brands/xiaomi.png"
-          alt="Xiaomi"
-          width={400}
-          height={200}
-          className="w-full h-auto object-contain"
-        />
-      </div>
-    </div>
-  )
+      
+      <Swiper
+        modules={[Autoplay]}
+        spaceBetween={30}
+        slidesPerView={2}
+        loop={true}
+        speed={3000}
+        autoplay={{
+          delay: 0,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
+        breakpoints={{
+          640: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
+          1024: {
+            slidesPerView: 5,
+            spaceBetween: 60,
+          },
+        }}
+        className="brands-swiper"
+      >
+        {BrandList.map((brand) => (
+          <SwiperSlide key={brand.id}>
+            <div className="flex items-center justify-center h-32 px-4 transition-all duration-300 hover:opacity-100">
+              <Image
+                src={brand.image}
+                alt={brand.name}
+                width={150}
+                height={80}
+                className="w-auto h-auto max-h-16 object-contain"
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
+  );
 }

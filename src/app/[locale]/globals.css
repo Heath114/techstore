@@ -18,6 +18,8 @@ html {
   scroll-behavior: smooth;
 }
 
+
+/* Lenis smooth scrolling styles */
 html.lenis, html.lenis body {
   height: auto;
 }
@@ -38,6 +40,8 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
+
+
 body {
   background: 
     url('/slider/denim.png') repeat,
@@ -56,7 +60,7 @@ h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea, label, a {
 /* Swiper pagination styles */
 .pro-swiper .swiper-pagination-bullet {
   width: 10px;
-  height: 8px;
+  height: 12px;
   border-radius: 9999px;
   background: rgba(255,255,255,0.55);
   opacity: 1; 
@@ -71,7 +75,36 @@ h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea, label, a {
 
 .pro-swiper .swiper-pagination-bullet.swiper-pagination-bullet-active {
   width: 28px;                
-  background: #a855f7;        
+  background: #5d2294;        
+}
+
+
+/* Base track */
+.pro-pagination.swiper-pagination-progressbar {
+  position: static !important;    /* keep it in normal flow */
+  height: 2px !important;         /* thinner line */
+  width: auto !important;         /* override swiper's 100% */
+  background: rgba(0, 0, 0, 0.06) !important; /* very light gray track */
+  border-radius: 9999px;
+  overflow: hidden;               /* round the fill ends */
+
+}
+
+/* Filled portion */
+.pro-pagination .swiper-pagination-progressbar-fill {
+  background: #0c0c0c !important; /* dark charcoal like your screenshot */
+  border-radius: 9999px;
+  transform-origin: left center;  /* fill grows from the left */
+}
+
+/* Optional: darker track on hover (nice subtle effect) */
+.pro-swiper:hover + .pro-pagination.swiper-pagination-progressbar {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Optional RTL support (if your /ar route flips direction) */
+html[dir="rtl"] .pro-pagination .swiper-pagination-progressbar-fill {
+  transform-origin: right center;
 }
 
 @media (prefers-reduced-motion: reduce) {

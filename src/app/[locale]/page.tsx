@@ -11,10 +11,9 @@ export default function Page() {
   return (
     <main className="">
       <HeroSlider />
-      <BrandsSection />
       <Products />
+      <BrandsSection />
       <WhyChooseUs />
-      <div className="h-[10vh]"></div>
     </main>
   );
 }

@@ -1,6 +1,7 @@
 // src/app/[locale]/[slug]/page.tsx
 
 import { ProductList, type Product } from '@/app/data/products';
+import { getProductPrice } from '@/app/data/products';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,7 +9,7 @@ import { ProductShowcase } from './ProductShowcase';
 
 function RelatedProductCard({ product, locale }: { product: Product, locale: string }) {
     return (
-      <Link href={`/${locale}/${product.slug}`} className="group block">
+      <Link href={`/${locale}/p/${product.slug}`} className="group block">
           <div className="relative aspect-square overflow-hidden mb-4">
               <Image
                 src={product.image ?? '/images/products/placeholder.png'}
@@ -16,18 +17,30 @@ function RelatedProductCard({ product, locale }: { product: Product, locale: str
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
+              {product.isSale && (
+                <div className="absolute top-2 left-2 bg-red-700 text-white px-[8px] py-[2px] text-[10px]">
+                  ON SALE
+                </div>
+              )}
           </div>
           <div>
-              <h3 className="text-lg text-gray-900 mb-1">{product.name}</h3>
-              <p className="text-base text-gray-600">${product.price.toFixed(2)}</p>
+              <h3 className="text-base text-gray-700 font-normal mb-1">{product.name}</h3>
+              <div className="mt-2">
+                {product.isSale ? (
+                  <>
+                    <span className="text-sm text-gray-300 line-through">{`$${product.originalPrice.toFixed(2)}`}</span>
+                    <span className="text-sm text-gray-700 ml-2">{`$${getProductPrice(product).toFixed(2)}`}</span>
+                  </>
+                ) : (
+                  <span className="text-sm text-gray-700">{`$${getProductPrice(product).toFixed(2)}`}</span>
+                )}
+              </div>
           </div>
       </Link>
     );
 }
 
 export default async function ProductPage({ params }: { params: { locale: string; slug: string } }) {
-
-  
   
   const { slug, locale } = await params;
   const product = ProductList.find((p) => p.slug === slug);
@@ -53,7 +66,7 @@ export default async function ProductPage({ params }: { params: { locale: string
           <aside className="border-t border-gray-200 py-20 bg-gray-50">
               <div className="mx-auto max-w-6xl px-6">
                 <h2 className="text-4xl text-gray-900 mb-12 text-center">Related Products</h2>
-                <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+                <div className="grid grid-cols-2 gap-8 lg:grid-cols-3">
                     {relatedProducts.map((p) => (
                         <RelatedProductCard key={p.id} product={p} locale={locale} />
                     ))}

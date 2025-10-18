@@ -38,7 +38,7 @@ const slides: Slide[] = [
       'Power your day with reliable capacity and premium build quality.',
     ctaText: 'Explore',
     ctaHref: '/collections/new',
-    imageUrl: '/slider/img2.jpg',
+    imageUrl: '/slider/bbbb.webp',
     alt: 'Lifestyle tech setup',
   },
   {
@@ -48,7 +48,7 @@ const slides: Slide[] = [
       'Compact design that fits anywhere without compromising performance.',
     ctaText: 'See details',
     ctaHref: '/collections/travel',
-    imageUrl: '/slider/img3.jpg',
+    imageUrl: '/slider/ll.webp',
     alt: 'Travel gear and accessories',
   },
   {
@@ -58,14 +58,14 @@ const slides: Slide[] = [
       'Rugged and reliable power banks built to withstand the toughest conditions.',
     ctaText: 'Buy now',
     ctaHref: '/products/durable-power-banks',
-    imageUrl: '/slider/img4.jpg',
+    imageUrl: '/slider/lll.webp',
     alt: 'Durable power bank in outdoor setting',
   }
 ];
 
 function ProHeroSlider() {
   return (
-    <section className="pt-24 w-full mx-auto mb-6" id="home">
+    <section className="w-full mx-auto mb-6" id="home">
       <div className="relative shadow-[0_10px_30px_rgba(0,0,0,0.12)] cursor-pointer">
         <Swiper
           modules={[Autoplay, Pagination, Navigation, EffectFade]}
@@ -74,7 +74,7 @@ function ProHeroSlider() {
           speed={900}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
-          className="h-[calc(100vh-6rem)] pro-swiper"
+          className="h-[120vh] pro-swiper"
         >
           {slides.map((s, i) => (
             <SwiperSlide key={s.id}>
@@ -85,7 +85,7 @@ function ProHeroSlider() {
                   alt={s.alt ?? s.title}
                   fill
                   priority={i === 0}
-                  className="object-cover"
+                  className="object-fit"
                 />
 
                 {/* Left gradient overlay */}
@@ -150,7 +150,7 @@ export default function Hero() {
   return (
     <>
       <ProHeroSlider />
-      <ItemsSection />
+      {/* <ItemsSection /> */}
     </>
   )
 }

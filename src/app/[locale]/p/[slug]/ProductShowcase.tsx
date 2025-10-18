@@ -2,11 +2,13 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Product } from '@/app/data/products';
+import { Product, getProductPrice } from '@/app/data/products';
 import { ProductGallery } from './ProductGallery';
 import { ContactButtons } from './ContactButtons';
 import Link from 'next/link';
 import { getColorObjects } from '@/lib/colorMap';
+import { Cross } from 'lucide-react';
+import router from 'next/router';
 
 // SVG Icons
 const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -20,7 +22,11 @@ const BoxIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
   </svg>
 );
-
+const CheckMark = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+);
 const TruckIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
@@ -55,6 +61,7 @@ function AccordionItem({ title, children, defaultOpen = false }: AccordionItemPr
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number | 'auto'>(defaultOpen ? 'auto' : 0);
+  const lang = 'en'; // Replace with actual locale logic if needed
 
   const toggle = () => {
     const el = contentRef.current;
@@ -139,7 +146,7 @@ export function ProductShowcase({ product }: ProductShowcaseProps) {
   
   return (
     <div className="py-32 pt-24">
-      <div className="text-black text-xs mb-4 mt-[-12px] w-[80%] mx-auto text-left">
+      <div className="text-black text-xs mb-4 mt-[-12px] mx-8 text-left">
         <Link href={`/${locale}`} className="text-gray-400 hover:text-gray-600 transition-colors">Home</Link>
         <span className="text-gray-900"> {'>'} </span>
         <Link href={`/${locale}/category/${product.category}`} className="text-gray-400 hover:text-gray-600 transition-colors">{product.category}</Link>
@@ -161,25 +168,42 @@ export function ProductShowcase({ product }: ProductShowcaseProps) {
           {/* Right: Product Info */}
           <div className="lg:w-1/2">
             <div className="mb-8 mt-4">
-              <h1 className="text-3xl text-gray-900 mb-4">{product.name}</h1>
-              <p className="text-lg  text-gray-800 mb-4">
-                {(Number(product.price || 0) * quantity).toFixed(2)} JOD
-              </p>
+              <h1 className="text-3xl text-gray-900">{product.name}</h1>
+              
+              {/* Price Display */}
+              <div className="mb-6">
+                {product.isSale ? (
+                  <>
+                    <span className="text-lg text-gray-400 line-through mr-2">
+                      {(product.originalPrice * quantity).toFixed(2)} JOD
+                    </span>
+                    <span className="text-lg text-gray-800">
+                      {(getProductPrice(product) * quantity).toFixed(2)} JOD
+                    </span>
+                    <span className="ml-2 bg-red-700 text-white px-2 py-1 text-xs">
+                      -{product.discount}% OFF
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-lg text-gray-800">
+                    {(getProductPrice(product) * quantity).toFixed(2)} JOD
+                  </span>
+                )}
+              </div>
 
               {/* In Stock Indicator */}
               <div className="inline-flex items-center gap-2 mb-6">
                 <div className={`w-3 h-3 rounded-full ${product.inStock !== false ? 'bg-green-500 ring-2 ring-gray-200' : 'bg-red-500'}`} />
-                <span className="text-base text-gray-700 font-medium">
+                <span className="text-base text-gray-800">
                   {product.inStock !== false ? 'In stock' : 'Out of stock'}
                 </span>
               </div>
-
               {/* Color Options - Only show if colors are available */}
               {colors.length > 0 && (
                 <div className="mb-6">
                   <div className="flex items-center gap-1 mb-3">
-                    <p className="text-base text-gray-700">Color:</p>
-                    <span className="text-base font-semibold text-gray-900">{colors[selectedColor].name}</span>
+                    <p className="text-base text-gray-800">Color:</p>
+                    <span className="text-base font-medium text-gray-900">{colors[selectedColor].name}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     {colors.map((color, index) => (
@@ -229,6 +253,15 @@ export function ProductShowcase({ product }: ProductShowcaseProps) {
 
             {/* Contact Buttons */}
             <ContactButtons productName={product.name} />
+            
+            {/**Available Section */}
+            <div className="mt-8 flex items-center gap-2 text-gray-800 text-lg">
+              <CheckMark className="h-6 w-6 text-green-500" />
+              <h4>Pickup Available at TechStore - Amman</h4>
+            </div>
+            <div className="mt-2 text-gray-800 ml-8">
+              <p className="underline-offset-2 underline text-lg cursor-pointer" onClick={() => router.push(`/${locale}`)}>View Store Information</p>
+            </div>
 
             {/* Accordion Sections */}
             <div className="border-t border-gray-200 mt-12 pt-8">
