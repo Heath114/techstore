@@ -15,9 +15,12 @@ export default function Header() {
 
   return (
     // The header is fixed to the top of the viewport.
-    <header className="bg-white fixed w-full z-50 top-0 left-0 border-b border-gray-200">
-      <div className="flex justify-between items-center py-4 px-8">
-        <div className="flex-shrink-0">
+    <header className="bg-white fixed py-4 px-16 w-full z-50 top-0 left-0">
+      <div className="flex items-center border-b border-gray-300 py-1">
+        <div className="flex-1">
+          <SearchBar />
+        </div>
+        <div className="flex-shrink-0 mx-8">
           <Link href="/">
             <Image 
               src="/images/logos/logo.png" 
@@ -28,10 +31,9 @@ export default function Header() {
             />
           </Link>
         </div>
-
-        <SearchBar />
-
-        <CallUsButton />
+        <div className="flex-1 flex justify-end">
+          <CallUsButton />
+        </div>
       </div>
     </header>
   );
@@ -45,8 +47,8 @@ function SearchBar() {
   const lang = params.lang || 'en';
   
   return (
-    <div className="relative flex-1 mx-4 max-w-6xl hidden md:flex items-center bg-lavender rounded-lg">
-      <div className="absolute left-3">
+    <div className="relative flex-1 max-w-4xl hidden md:flex items-center bg-lavender rounded-lg">
+      <div className="absolute">
         <Search className="text-gray-400" size={20} />
       </div>
       <input
@@ -54,7 +56,7 @@ function SearchBar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search products..."
-        className="w-full border text-gray-900 border-gray-200 bg-white rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-300"
+        className="w-full text-gray-900 border-gray-200 bg-white rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-300"
       />
       {query && results.length > 0 && (
         <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md mt-1 max-h-60 overflow-y-auto z-10 shadow-lg">

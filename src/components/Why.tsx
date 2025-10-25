@@ -55,7 +55,7 @@ const WhyChooseUs: React.FC = () => {
   ];
 
   return (
-    <section className="pb-16 pt-16 w-[75%] mx-auto rounded-lg my-16 bg-gray-50 border border-gray-200">
+    <section className="pb-16 pt-16 w-[75%] mx-auto my-16 bg-gray-50 border border-gray-200">
       <div className="max-w-7xl mx-auto px-8">
         <h2 className="text-3xl font-medium text-gray-900 mb-12 text-center tracking-wide">
           Why choose to buy from This Techshop?

@@ -66,7 +66,7 @@ const slides: Slide[] = [
 function ProHeroSlider() {
   return (
     <section className="w-full mx-auto mb-6" id="home">
-      <div className="relative shadow-[0_10px_30px_rgba(0,0,0,0.12)] cursor-pointer">
+      <div className="relative shadow-[0_10px_30px_rgba(0,0,0,0.12)]">
         <Swiper
           modules={[Autoplay, Pagination, Navigation, EffectFade]}
           fadeEffect={{ crossFade: true }}

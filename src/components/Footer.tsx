@@ -17,12 +17,12 @@ function AboveFooter() {
         </div>
         <div className="flex items-end gap-4">
           <button
-            className="bg-white text-base font-medium py-3 px-6 rounded-md hover:bg-gray-100 text-gray-900 cursor-pointer transition-colors duration-300"
+            className="bg-white text-base font-medium py-3 px-6 hover:bg-gray-100 text-gray-900 cursor-pointer transition-colors duration-300"
             onClick={() => window.open('https://www.google.com/maps', '_blank')}>
               <Map className="inline mr-2 w-4 h-4"/> Get Directions
           </button>
           <button
-            className="bg-white text-base font-medium py-3 px-6 rounded-md hover:bg-gray-100 text-gray-900 cursor-pointer transition-colors duration-300"
+            className="bg-white text-base font-medium py-3 px-6 hover:bg-gray-100 text-gray-900 cursor-pointer transition-colors duration-300"
             onClick={() => window.open('tel:203997333333')}>
               <Phone className="inline mr-2 w-4 h-4"/> Make a Call
           </button>

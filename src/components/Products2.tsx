@@ -18,10 +18,24 @@ import 'swiper/css/navigation';
 export default function ProductsSection() {
     const [mounted, setMounted] = React.useState(false);
     const [disableSwiper, setDisableSwiper] = React.useState(false);
+    const [filter, setFilter] = React.useState<string>('all');
     const router = useRouter();
     const params = useParams();
     const lang = params?.locale as string || 'en';
     
+    // Add more categories as needed
+    const categoryMap = {
+        'all': 'All Products',
+        'Phones': 'Phones',
+        'Tablets': 'Tablets',
+        'iPads': 'iPads',
+        // 'Laptops': 'Laptops',
+        // 'Computers': 'Computers',
+        // 'Wearables': 'Wearables',
+        'Accessories': 'Accessories'
+    }
+    
+//IWAS WORKING HERE ON ADDING FILTERING LOGIC
     React.useEffect(() => {
         setMounted(true);
         setDisableSwiper(true);
@@ -35,7 +49,8 @@ export default function ProductsSection() {
         <section className="w-full max-w-[1440px] mx-auto lg:px-0 px-4 py-16 bg-white"
  id="deals">
             <div className="">
-                <h3 className="text-[32px] font-medium text-gray-900 mb-12 tracking-wide">BESTSELLERS</h3>
+                <h3 className="text-[32px] font-medium text-gray-900 mb-12 tracking-wide">OUR PRODUCTS</h3>
+                <div></div>
                 <div className="relative">
                     <Swiper
                         modules={[Autoplay, Pagination, Navigation]}
