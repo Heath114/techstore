@@ -64,7 +64,7 @@ export const ProductList: Product[] = [
             "User Manual"
         ],
         images: ["/images/products/img2.jpg", "/images/products/img3.jpg", "/images/products/img1.jpg", "/images/products/placeholder.png"],
-        slug: "wireless-mouse",
+        slug: "wireless-mouse-logitech",
         isSale: true,
         originalPrice: 29.99,
         discount: 10,
@@ -75,7 +75,7 @@ export const ProductList: Product[] = [
         description: "A highprecision wireless mouse with ergonomic design.",
         image: "/images/products/2.webp",
         brand: "Logitech",
-        category: "Accessories",
+        category: "Tablets",
         colors: ["Black", "White", "Blue"],
         features: [
             "Ergonomic Design",
@@ -97,7 +97,7 @@ export const ProductList: Product[] = [
         ],
         price: 26.99,
         images: ["/images/products/img2.jpg", "/images/products/img3.jpg", "/images/products/img1.jpg", "/images/products/placeholder.png"],
-        slug: "wireless-mouse",
+        slug: "wireless-mouse-tablet",
         isSale: true,
         originalPrice: 29.99,
         discount: 10,
@@ -108,7 +108,7 @@ export const ProductList: Product[] = [
         description: "A highprecision wireless mouse with ergonomic design.",
         image: "/images/products/3.webp",
         brand: "Logitech",
-        category: "Accessories",
+        category: "Tablets",
         colors: ["Black", "White", "Blue"],
         features: [
             "Ergonomic Design",
@@ -156,7 +156,7 @@ export const ProductList: Product[] = [
         description: "A highprecision wireless mouse with ergonomic design.",
         image: "/images/products/4.webp",
         brand: "Logitech",
-        category: "Accessories",
+        category: "Phones",
         colors: ["Black", "White", "Blue"],
         features: [
             "Ergonomic Design",
@@ -178,7 +178,7 @@ export const ProductList: Product[] = [
         ],
         price: 29.99,
         images: ["/images/products/img2.jpg", "/images/products/img3.jpg", "/images/products/img1.jpg", "/images/products/placeholder.png"],
-        slug: "wireless-mouse"
+        slug: "wireless-mouse-phone"
     },
   {
         id: 5,
@@ -186,7 +186,7 @@ export const ProductList: Product[] = [
         description: "A highprecision wireless mouse with ergonomic design.",
         image: "/images/products/img1.jpg",
         brand: "Logitech",
-        category: "Accessories",   
+        category: "Phones",   
         colors: ["Black", "White", "Blue"],
         features: [
             "Ergonomic Design",
@@ -208,7 +208,7 @@ export const ProductList: Product[] = [
         ],
         price: 29.99,
         images: ["/images/products/img2.jpg", "/images/products/img3.jpg", "/images/products/img1.jpg", "/images/products/placeholder.png"],
-        slug: "wireless-mouse"
+        slug: "wireless-mouse-accessories"
     },
     {
         id: 6,
@@ -217,7 +217,7 @@ export const ProductList: Product[] = [
         price: 799.99,
         brand: "Samsung",
         image: "/images/products/img2.jpg",
-        category: "Smartphones",
+        category: "Accessories",
         colors: ["Phantom Gray", "Phantom White", "Phantom Violet", "Phantom Pink"],
         features: [
             "6.2-inch Dynamic AMOLED 2X Display",
@@ -252,7 +252,7 @@ export const ProductList: Product[] = [
         price: 699.99,
         image: "/images/products/img3.jpg",
         brand: "Google",
-        category: "Smartphones",
+        category: "iPads",
         colors: ["Stormy Black", "Kinda Coral", "Sorta Seafoam", "Cloudy White"],
         features: [
             "6.4-inch OLED Display",
@@ -287,7 +287,7 @@ export const ProductList: Product[] = [
         image: "/images/products/img4.jpg",
         slug: "oneplus-9",
         brand: "OnePlus",
-        category: "Smartphones",
+        category: "Accessories",
         colors: ["Black", "Arctic Sky", "Winter Mist"],
         images: [
             "/images/products/img1.jpg",
@@ -347,7 +347,7 @@ export const ProductList: Product[] = [
         ],
         price: 29.99,
         images: ["/images/products/img2.jpg", "/images/products/img3.jpg", "/images/products/img1.jpg", "/images/products/placeholder.png"],
-        slug: "wireless-mouse"
+        slug: "wireless-mouse-gaming"
     },
     {
         id: 10,
@@ -377,7 +377,7 @@ export const ProductList: Product[] = [
         ],
         price: 29.99,
         images: ["/images/products/img2.jpg", "/images/products/img3.jpg", "/images/products/img1.jpg", "/images/products/placeholder.png"],
-        slug: "wireless-mouse"
+        slug: "wireless-mouse-pro"
     }
 ];
 

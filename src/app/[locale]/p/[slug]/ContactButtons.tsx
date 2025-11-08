@@ -46,14 +46,14 @@ export function ContactButtons({ productName }: ContactButtonsProps) {
   const smsUrl = `sms:&body=${encodedMessage}`; // For iOS, no number is needed to open the app
 
   return (
-    <div className="mt-8 space-y-4">
+    <div className="mt-6 md:mt-8 space-y-3 md:space-y-4">
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex w-full text-xl items-center justify-center gap-3 bg-green-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+        className="flex w-full text-lg md:text-xl items-center justify-center gap-2 md:gap-3 bg-green-600 px-4 md:px-6 py-2.5 md:py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-green-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
       >
-        <Image src="/images/icons/whatsapp.png" alt="WhatsApp" width={512} height={512} className="h-10 w-10" />
+        <Image src="/images/icons/whatsapp.png" alt="WhatsApp" width={512} height={512} className="h-8 w-8 md:h-10 md:w-10" />
         Order Now on WhatsApp
       </a>
 
@@ -63,9 +63,9 @@ export function ContactButtons({ productName }: ContactButtonsProps) {
           href={smsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex w-full items-center justify-center gap-3 rounded-lg bg-blue-500 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-blue-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="flex w-full text-base md:text-lg items-center justify-center gap-2 md:gap-3 rounded-lg bg-blue-500 px-4 md:px-6 py-2.5 md:py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-blue-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
-          <MessageIcon className="h-6 w-6" />
+          <MessageIcon className="h-5 w-5 md:h-6 md:w-6" />
           or Send an iMessage/SMS
         </a>
       )}

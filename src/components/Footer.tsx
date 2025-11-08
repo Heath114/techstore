@@ -1,28 +1,40 @@
-// src/components/Footer/index.tsx
 'use client';
 import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Phone, Mail, Map } from 'lucide-react';
-import { collection, doc, addDoc, query, where, getDocs, setDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import NumberInputComponent from './Subscribe'
+import Image from 'next/image'
+import { 
+  FacebookIcon, 
+  TwitterIcon, 
+  InstagramIcon, 
+  WhatsAppIcon, 
+  PhoneIcon,
+  VisaIcon,
+  MastercardIcon,
+  PayPalIcon,
+  ApplePayIcon,
+  AmexIcon,
+  GooglePayIcon
+} from '@/app/data/icons';
 
 function AboveFooter() {
   return (
-    <section className="flex flex-col bg-gray-900 py-12 px-8 md:px-40 border-b border-gray-800" id="contact">
-      <div className="flex justify-between items-center">
+    <section className="flex flex-col bg-gray-900 py-8 md:py-12 px-4 md:px-8 lg:px-40 border-b border-gray-800" id="contact">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-medium text-white">Contact Us</h1>
-          <p className="text-base text-gray-400">You can call us any time.</p>
+          <h1 className="text-2xl md:text-3xl font-medium text-white">Contact Us</h1>
+          <p className="text-sm md:text-base text-gray-400">You can call us any time.</p>
         </div>
-        <div className="flex items-end gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 md:gap-4 w-full sm:w-auto">
           <button
-            className="bg-white text-base font-medium py-3 px-6 hover:bg-gray-100 text-gray-900 cursor-pointer transition-colors duration-300"
+            className="bg-white text-sm md:text-base font-medium py-2.5 md:py-3 px-4 md:px-6 hover:bg-gray-300 text-gray-900 cursor-pointer transition-colors duration-300 whitespace-nowrap"
             onClick={() => window.open('https://www.google.com/maps', '_blank')}>
               <Map className="inline mr-2 w-4 h-4"/> Get Directions
           </button>
           <button
-            className="bg-white text-base font-medium py-3 px-6 hover:bg-gray-100 text-gray-900 cursor-pointer transition-colors duration-300"
+            className="bg-white text-sm md:text-base font-medium py-2.5 md:py-3 px-4 md:px-6 hover:bg-gray-300 text-gray-900 cursor-pointer transition-colors duration-300 whitespace-nowrap"
             onClick={() => window.open('tel:203997333333')}>
               <Phone className="inline mr-2 w-4 h-4"/> Make a Call
           </button>
@@ -32,250 +44,239 @@ function AboveFooter() {
   )
 }
 
-function FooterContent() {
-  const { lang } = useParams();
-
-  return (
-    <div
-      className="
-        bg-gray-900 text-white
-        py-10 px-4
-        sm:py-12 sm:px-8
-        h-full w-full
-        flex flex-col justify-between
-        relative
-      "
-      dir={lang === 'ar' ? 'rtl' : 'ltr'}
-    >
-      <FooterNav />
-      <FooterBottom />
-    </div>
-  );
-}
-
 // Navigation section
 const FooterNav = () => {
   const { lang } = useParams();
   const currentLang = lang === 'ar' ? 'ar' : 'en';
+  const [openSections, setOpenSections] = React.useState<string[]>([]);
+  const [isDesktop, setIsDesktop] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
+
+  const toggleSection = (section: string) => {
+    if (!isDesktop) {
+      setOpenSections(prev => 
+        prev.includes(section) 
+          ? prev.filter(s => s !== section)
+          : [...prev, section]
+      );
+    }
+  };
+
+  const isSectionOpen = (section: string) => {
+    return isDesktop || openSections.includes(section);
+  };
 
   return (
-    <div className={`flex items-start justify-between flex-row px-8 gap-12`}>
-      <div className={`flex flex-col gap-3`}>
-        <h3 className={`mb-3 uppercase text-gray-500 font-medium text-sm tracking-wider`}>
-          Contact Us 
-        </h3>
-        <div className={`flex gap-3 items-center`}>
-          <Phone className="text-gray-500 w-4 h-4" />
-          <p className="text-base text-white hover:text-gray-300 cursor-pointer transition-colors duration-300" onClick={() => window.open('tel:203997333333')}>203997333333</p>
-        </div>
-        <div className={`flex gap-3 items-center`}>
-          <Mail className="text-gray-500 w-4 h-4" />
-          <p className="text-base text-white hover:text-gray-300 cursor-pointer transition-colors duration-300" onClick={() => window.open('mailto:info@example.com')}>info@example.com</p>
-        </div>
-        <div className={`flex gap-3 items-center`}>
-          <Map className="text-gray-500 w-4 h-4" />
-          <p className="text-base text-white hover:text-gray-300 cursor-pointer transition-colors duration-300" onClick={() => window.open('https://www.google.com/maps', '_blank')}>123 Main St, Anytown, USA</p>
+    <div className={`flex flex-col md:flex-row items-start justify-between px-4 md:px-8 gap-6 md:gap-12 flex-1`}>
+      {/* Newsletter Section - Always visible */}
+      <div className="flex flex-col gap-4 md:gap-6 justify-start h-full w-full md:max-w-sm">
+        <NumberInputComponent />
+      </div>
+
+      {/* Support Section */}
+      <div className="w-full md:w-auto border-b border-gray-800 md:border-0 pb-4 md:pb-0">
+        <button
+          onClick={() => toggleSection('support')}
+          className="flex items-center justify-between w-full md:cursor-default"
+        >
+          <h3 className="mb-2 uppercase text-gray-400 font-medium text-base md:text-lg tracking-wider">
+            Support
+          </h3>
+          <span className="md:hidden text-gray-400 text-xl">
+            {isSectionOpen('support') ? '−' : '+'}
+          </span>
+        </button>
+        <div className={`flex flex-col gap-2 md:gap-3 overflow-hidden transition-all duration-500 ease-in-out ${
+          isSectionOpen('support') ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'
+        }`}>
+          <Link href="#terms" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
+            Terms of Service
+          </Link>
+          <Link href="#shipping" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
+            Shipping Policy
+          </Link>
+          <Link href="#refund" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
+            Refund Policy
+          </Link>
+          <Link href="#faq" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
+            FAQ
+          </Link>
+          <Link href="#location" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
+            Store Location
+          </Link>
         </div>
       </div>
 
-      <div className={`flex flex-col gap-3`}>
-        <h3 className={`mb-3 uppercase text-gray-500 font-medium text-sm tracking-wider`}>
-          Quick Links
-        </h3>
-        <div className={`flex gap-2 items-center`}>
-          <Link href="#home" className="text-base text-white hover:text-gray-300 transition-colors duration-300">Home</Link>
-        </div>
-        <div className={`flex gap-2 items-center`}>
-          <Link href="#deals" className="text-base text-white hover:text-gray-300 transition-colors duration-300">Deals</Link>
-        </div>
-        <div className={`flex gap-2 items-center`}>
-          <Link href="#contact" className="text-base text-white hover:text-gray-300 transition-colors duration-300">Contact</Link>
+      {/* Quick Links Section */}
+      <div className="w-full md:w-auto border-b border-gray-800 md:border-0 pb-4 md:pb-0">
+        <button
+          onClick={() => toggleSection('quick')}
+          className="flex items-center justify-between w-full md:cursor-default"
+        >
+          <h3 className="mb-2 uppercase text-gray-400 font-medium text-base md:text-lg tracking-wider">
+            Quick Links
+          </h3>
+          <span className="md:hidden text-gray-400 text-xl">
+            {isSectionOpen('quick') ? '−' : '+'}
+          </span>
+        </button>
+        <div className={`flex flex-col gap-2 md:gap-3 overflow-hidden transition-all duration-300 ease-in-out ${
+          isSectionOpen('quick') ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'
+        }`}>
+          <Link href="#home" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
+            Home
+          </Link>
+          <Link href="#deals" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
+            Deals
+          </Link>
+          <Link href="#contact" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
+            Contact
+          </Link>
         </div>
       </div>
 
-      <NumberInputComponent />
-      
-      <div className={`flex flex-col gap-3`}>
-        <h3 className={`mb-3 uppercase text-gray-500 font-medium text-sm tracking-wider`}>
-          Opening Hours
-        </h3>
-        <p className="text-2xl px-4">Mon-Fri: 9am - 6pm</p>
-        <p className="text-2xl px-4">Sat: 10am - 4pm</p>
-        <p className="text-2xl px-4">Sun: Closed</p>
+      {/* Opening Hours Section */}
+      <div className="w-full md:w-auto border-b border-gray-800 md:border-0 pb-4 md:pb-0">
+        <button
+          onClick={() => toggleSection('hours')}
+          className="flex items-center justify-between w-full md:cursor-default"
+        >
+          <h3 className="mb-2 uppercase text-gray-400 font-medium text-base md:text-lg tracking-wider">
+            Opening Hours
+          </h3>
+          <span className="md:hidden text-gray-400 text-xl">
+            {isSectionOpen('hours') ? '−' : '+'}
+          </span>
+        </button>
+        <div className={`flex flex-col gap-2 md:gap-3 overflow-hidden transition-all duration-300 ease-in-out ${
+          isSectionOpen('hours') ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'
+        }`}>
+          <p className="text-sm md:text-base text-gray-300">Mon-Fri: 9am - 6pm</p>
+          <p className="text-sm md:text-base text-gray-300">Sat: 10am - 4pm</p>
+          <p className="text-sm md:text-base text-gray-300">Sun: Closed</p>
+        </div>
       </div>
     </div>
   );
 };
 
-function NumberInputComponent() {
-  const [phoneNumber, setPhoneNumber] = React.useState('');
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [message, setMessage] = React.useState('');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    // Validation
-    if (!phoneNumber.trim()) {
-      setMessage('Please enter a phone number');
-      return;
-    }
-    
-    if (phoneNumber.length < 10) {
-      setMessage('Please enter a valid phone number (at least 10 digits)');
-      return;
-    }
-
-    setIsSubmitting(true);
-    setMessage('');
-
-    try {
-      
-      const sanitizedPhoneNumber = phoneNumber.replace(/\D/g, '');
-      const subscriberDocRef = doc(db, 'subscribers', sanitizedPhoneNumber);
-
-    
-      // Add new subscriber to Firestore
-      await setDoc(subscriberDocRef, {
-        phoneNumber: sanitizedPhoneNumber,
-        subscribedAt: serverTimestamp(),
-        source: 'website_footer',
-        status: 'active'
-      }, { merge: true });
-      
-      setMessage('Success! You are now subscribed to our deals list.');
-      setPhoneNumber('');
-      
-      // Optional: Log success to console for debugging
-      console.log('New subscriber added:', phoneNumber);
-      
-    } catch (error) {
-      console.error('Error adding subscriber:', error);
-      setMessage('Something went wrong. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full max-w-sm">
-      <h3 className={`mb-2 sm:mb-4 uppercase text-gray-400 font-semibold lg:text-4xl`}>
-        Join our Deals List
-      </h3>
-      <div className="relative w-full">
-        <input
-          type="tel"
-          placeholder="Enter phone number"
-          value={phoneNumber}
-          onChange={(e) => {
-            // Only allow numbers and common phone characters
-            const value = e.target.value.replace(/[^\d+\-\s()]/g, '');
-            setPhoneNumber(value);
-          }}
-          disabled={isSubmitting}
-          className="w-full border-b border-gray-600 bg-transparent py-2 pr-10 text-3xl placeholder-gray-600 focus:outline-none focus:border-white disabled:opacity-50"
-        />
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="absolute right-0 top-1/2 -translate-y-1/2 text-black hover:translate-x-1 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitting ? (
-            <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="w-6 h-6 text-white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M5 12h14m-7-7l7 7-7 7"
-              />
-            </svg>
-          )}
-        </button>
-      </div>
-      {message && (
-        <p className={`text-xl mt-2 ${
-          message.includes('Success') ? 'text-green-400' : 
-          message.includes('already') ? 'text-yellow-400' : 
-          'text-red-400'
-        }`}>
-          {message}
-        </p>
-      )}
-    </form>
-  );
-}
-
-// Bottom section with social links and copyright
 // Bottom section with social links and copyright
 const FooterBottom = () => {
   const { lang } = useParams();
 
   return (
-    <div
-      className={`${lang === 'ar' ? 'flex-row-reverse' : ''}
-         flex justify-between items-end pt-6 gap-4 relative
-      `}
-    >
-      {/* Left side - Company name */}
-      <div className="flex items-center flex-shrink-0 border-t border-gray-700">
-        <h2 className={`${lang === 'ar' ? 'text-[12vw] sm:text-[5vw] lg:text-[4rem]' : 'text-[14vw] sm:text-[6vw] lg:text-[6rem]'} font-light leading-none`}>
-          placeholder text shop
-        </h2>
+    <div className={`px-4 md:px-8 w-full flex flex-col gap-6 mt-auto`}>
+      {/* Icons Container - Mobile: stacked, Desktop: same row */}
+      <div className="flex flex-col md:flex-row items-center md:items-center md:justify-between gap-6">
+        {/* Social media icons - left on desktop */}
+        <div className='flex bg-gray-800 border border-gray-700'>
+          {/** Facebook Icon */}
+          <a href="#" className="w-12 h-12 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+            <FacebookIcon />
+          </a>
+          {/** Twitter Icon */}
+          <a href="#" className="w-12 h-12 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+            <TwitterIcon />
+          </a>
+          {/** Instagram Icon */}
+          <a href="#" className="w-12 h-12 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+            <InstagramIcon />
+          </a>
+          {/** WhatsApp Icon */}
+          <a href="#" className="w-12 h-12 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-green-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+            <WhatsAppIcon />
+          </a>
+          {/** Phone Icon */}
+          <a href="#" className="w-12 h-12 flex items-center justify-center relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+            <PhoneIcon />
+          </a>
+        </div>
+
+        {/* Payment options - right on desktop */}
+        <div className='flex bg-gray-800 border border-gray-700'>
+          <div className="w-12 h-12 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+            <VisaIcon />
+          </div>
+          <div className="w-12 h-12 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+            <MastercardIcon />
+          </div>
+          <div className="w-12 h-12 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+            <PayPalIcon />
+          </div>
+          <div className="w-12 h-12 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+            <ApplePayIcon />
+          </div>
+          <div className="w-12 h-12 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+            <AmexIcon />
+          </div>
+          <div className="w-12 h-12 flex items-center justify-center cursor-pointer relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+            <GooglePayIcon />
+          </div>
+        </div>
       </div>
 
-      {/* Right side - Social media icons */}
-      <div className={`${lang === 'ar' ? 'text-left' : 'text-right'} flex-shrink-0`}>
-        <div className={`flex gap-3 sm:gap-4 mb-2 sm:mb-4 ${lang === 'ar' ? 'justify-start' : 'justify-end'}`}>
-          <Link
-            href="https://www.instagram.com/newlook_jo/?next=%2Fdirect%2Ft%2F117471066306121%2F"
-            className="hover:opacity-70 transition-opacity"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <img src="/images/icons/instagram.png" alt="Instagram" className="w-4 h-4 sm:w-5 sm:h-5 lg:w-10 lg:h-10" />
-          </Link>
-          <Link
-            href="https://www.facebook.com/profile.php?id=100064126295491"
-            className="hover:opacity-70 transition-opacity"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <img src="/images/icons/facebook.png" alt="Facebook" className="w-4 h-4 sm:w-5 sm:h-5 lg:w-10 lg:h-10" />
-          </Link>
-        </div>
-      </div>
-      
-      {/* Payment cards - centered at bottom */}
-      <div className="absolute top-[98%] left-1/2 transform -translate-x-1/2 text-xs flex justify-between px-4">
-        <div className="flex gap-2 items-center">
-          <img src="/images/logos/card1.png" alt="Visa" className="w-6 h-4 sm:w-8 sm:h-5 lg:w-4 lg:h-4" />
-          <img src="/images/logos/card2.png" alt="MasterCard" className="w-6 h-4 sm:w-8 sm:h-5 lg:w-4 lg:h-4" />
-          <img src="/images/logos/card3.png" alt="PayPal" className="w-6 h-4 sm:w-8 sm:h-5 lg:w-4 lg:h-4" />
-        </div>
+      {/* Copyright text - absolute bottom */}
+      <div className="text-sm text-gray-400 text-center mt-8 pb-4">
+        © {new Date().getFullYear()} TechStore. All rights reserved.
       </div>
     </div>
   );
 };
 
+
+function FooterContent() {
+  const { lang } = useParams();
+
+  return (
+    <div
+      className="bg-gray-900 text-white pt-12 md:pt-16 px-4 w-full flex flex-col min-h-full"
+      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+    >
+      <FooterNav />
+      <div className="flex-1"></div>
+      <FooterBottom />
+    </div>
+  );
+}
+
 export default function StickyFooter() {
   return (
     <>
       <AboveFooter />
-      <div
-        className="relative h-[500px]"
-        style={{ clipPath: 'polygon(0% 0, 100% 0%, 100% 100%, 0 100%)' }}
-      >
-        <div className="relative h-[calc(100vh+500px)] -top-[100vh]">
-          <div className="sticky z-10 top-[calc(100vh-500px)] h-[500px]">
-            <FooterContent />
+      {/* Mobile: Simple footer, Desktop: Sticky footer */}
+      <div className="md:hidden">
+        <FooterContent />
+      </div>
+      <div className="hidden md:block">
+        <div
+          className="relative h-[500px]"
+          style={{ clipPath: 'polygon(0% 0, 100% 0%, 100% 100%, 0 100%)' }}
+        >
+          <div className="relative h-[calc(100vh+500px)] -top-[100vh]">
+            <div className="sticky z-10 top-[calc(100vh-500px)] h-[500px]">
+              <FooterContent />
+            </div>
           </div>
         </div>
       </div>

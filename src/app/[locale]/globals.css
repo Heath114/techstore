@@ -112,3 +112,14 @@ html[dir="rtl"] .pro-pagination .swiper-pagination-progressbar-fill {
     transition: none;
   }
 }
+
+/* Hide scrollbar while maintaining scroll functionality */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
+}

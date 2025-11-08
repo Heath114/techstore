@@ -9,6 +9,16 @@ import Link from 'next/link';
 import { getColorObjects } from '@/lib/colorMap';
 import { Cross } from 'lucide-react';
 import router from 'next/router';
+import { 
+  FacebookIcon, 
+  TwitterIcon, 
+  InstagramIcon, 
+  WhatsAppIcon, 
+  PhoneIcon,
+  VisaIcon,
+  MastercardIcon,
+  PayPalIcon
+} from '@/app/data/icons';
 
 // SVG Icons
 const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -93,8 +103,8 @@ function AccordionItem({ title, children, defaultOpen = false }: AccordionItemPr
 
   return (
     <div className="border-b border-gray-200">
-      <button onClick={toggle} className="w-full flex items-center justify-between py-5 text-left group">
-        <span className="text-base font-normal text-gray-900 uppercase tracking-wider">{title}</span>
+      <button onClick={toggle} className="w-full flex items-center justify-between py-4 md:py-5 text-left group">
+        <span className="text-sm md:text-base font-normal text-gray-900 uppercase tracking-wider">{title}</span>
         <div className="relative w-5 h-5 text-gray-600 group-hover:text-gray-900">
           <div className={`absolute inset-0 transition-all duration-300 ease-in-out ${
             isOpen ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
@@ -113,7 +123,7 @@ function AccordionItem({ title, children, defaultOpen = false }: AccordionItemPr
         style={{ height: height === 'auto' ? 'auto' : `${height}px` }}
         className="overflow-hidden transition-[height] duration-500 ease-in-out"
       >
-        <div ref={contentRef} className="pb-6">{children}</div>
+        <div ref={contentRef} className="pb-4 md:pb-6">{children}</div>
       </div>
     </div>
   );
@@ -142,11 +152,44 @@ export function ProductShowcase({ product }: ProductShowcaseProps) {
     console.log('Quantity:', quantity);
   };
 
+  // Share functionality
+  const handleShare = (platform: 'facebook' | 'whatsapp' | 'instagram') => {
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+    const shareText = `Check out ${product.name} at TechStore!`;
+    
+    let shareUrl = '';
+    
+    switch (platform) {
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+        break;
+      
+      case 'whatsapp':
+        shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + currentUrl)}`;
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+        break;
+      
+      case 'instagram':
+        // Instagram doesn't support direct web sharing, so we copy the link to clipboard
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(currentUrl).then(() => {
+            alert('Link copied to clipboard! You can now share it on Instagram.');
+          }).catch(() => {
+            alert('Unable to copy link. Please copy manually: ' + currentUrl);
+          });
+        } else {
+          alert('Please copy this link to share on Instagram: ' + currentUrl);
+        }
+        break;
+    }
+  };
+
   const locale = 'en'; // Replace with actual locale logic if needed
   
   return (
-    <div className="py-32 pt-24">
-      <div className="text-black text-xs mb-4 mt-[-12px] mx-8 text-left">
+    <div className="py-12 md:py-24 lg:py-32 pt-16 md:pt-20 lg:pt-24">
+      <div className="text-black text-xs mb-4 mt-[-12px] mx-4 md:mx-6 lg:mx-8 text-left">
         <Link href={`/${locale}`} className="text-gray-400 hover:text-gray-600 transition-colors">Home</Link>
         <span className="text-gray-900"> {'>'} </span>
         <Link href={`/${locale}/category/${product.category}`} className="text-gray-400 hover:text-gray-600 transition-colors">{product.category}</Link>
@@ -154,10 +197,10 @@ export function ProductShowcase({ product }: ProductShowcaseProps) {
         <span className="text-gray-900">{product.name}</span>
       </div>
 
-      <div className="w-[75%] mx-auto">
+      <div className="w-full px-4 md:w-[90%] md:px-0 lg:w-[85%] xl:w-[75%] mx-auto">
         <div className="lg:flex lg:gap-12">
           {/* Left: Product Gallery */}
-          <div className="lg:w-1/2 lg:sticky lg:top-24 lg:self-start lg:h-[calc(100vh-12rem)]">
+          <div className="lg:w-1/2 lg:sticky lg:top-24 lg:self-start lg:h-[calc(100vh-12rem)] mb-8 lg:mb-0">
             <ProductGallery
               mainImage={product.image ?? '/images/products/placeholder.png'}
               images={product.images ?? []}
@@ -168,16 +211,16 @@ export function ProductShowcase({ product }: ProductShowcaseProps) {
           {/* Right: Product Info */}
           <div className="lg:w-1/2">
             <div className="mb-8 mt-4">
-              <h1 className="text-3xl text-gray-900">{product.name}</h1>
+              <h1 className="text-2xl md:text-3xl text-gray-900">{product.name}</h1>
               
               {/* Price Display */}
-              <div className="mb-6">
+              <div className="mb-4 md:mb-6">
                 {product.isSale ? (
                   <>
-                    <span className="text-lg text-gray-400 line-through mr-2">
+                    <span className="text-base md:text-lg text-gray-400 line-through mr-2">
                       {(product.originalPrice * quantity).toFixed(2)} JOD
                     </span>
-                    <span className="text-lg text-gray-800">
+                    <span className="text-base md:text-lg text-gray-800">
                       {(getProductPrice(product) * quantity).toFixed(2)} JOD
                     </span>
                     <span className="ml-2 bg-red-700 text-white px-2 py-1 text-xs">
@@ -185,32 +228,32 @@ export function ProductShowcase({ product }: ProductShowcaseProps) {
                     </span>
                   </>
                 ) : (
-                  <span className="text-lg text-gray-800">
+                  <span className="text-base md:text-lg text-gray-800">
                     {(getProductPrice(product) * quantity).toFixed(2)} JOD
                   </span>
                 )}
               </div>
 
               {/* In Stock Indicator */}
-              <div className="inline-flex items-center gap-2 mb-6">
+              <div className="inline-flex items-center gap-2 mb-4 md:mb-6">
                 <div className={`w-3 h-3 rounded-full ${product.inStock !== false ? 'bg-green-500 ring-2 ring-gray-200' : 'bg-red-500'}`} />
-                <span className="text-base text-gray-800">
+                <span className="text-sm md:text-base text-gray-800">
                   {product.inStock !== false ? 'In stock' : 'Out of stock'}
                 </span>
               </div>
               {/* Color Options - Only show if colors are available */}
               {colors.length > 0 && (
-                <div className="mb-6">
+                <div className="mb-4 md:mb-6">
                   <div className="flex items-center gap-1 mb-3">
-                    <p className="text-base text-gray-800">Color:</p>
-                    <span className="text-base font-medium text-gray-900">{colors[selectedColor].name}</span>
+                    <p className="text-sm md:text-base text-gray-800">Color:</p>
+                    <span className="text-sm md:text-base font-medium text-gray-900">{colors[selectedColor].name}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     {colors.map((color, index) => (
                       <button
                         key={index}
                         onClick={() => setSelectedColor(index)}
-                        className={`w-8 h-8 rounded-full border-1 transition-all duration-200 hover:scale-110 ${
+                        className={`w-7 h-7 md:w-8 md:h-8 rounded-full border-1 transition-all duration-200 hover:scale-110 ${
                           selectedColor === index 
                             ? 'border-gray-900 ring-1 ring-gray-900 ring-offset-2' 
                             : 'border-gray-300 hover:border-gray-400'
@@ -255,16 +298,47 @@ export function ProductShowcase({ product }: ProductShowcaseProps) {
             <ContactButtons productName={product.name} />
             
             {/**Available Section */}
-            <div className="mt-8 flex items-center gap-2 text-gray-800 text-lg">
-              <CheckMark className="h-6 w-6 text-green-500" />
+            <div className="mt-6 md:mt-8 flex items-center gap-2 text-gray-800 text-base md:text-lg">
+              <CheckMark className="h-5 w-5 md:h-6 md:w-6 text-green-500" />
               <h4>Pickup Available at TechStore - Amman</h4>
             </div>
-            <div className="mt-2 text-gray-800 ml-8">
-              <p className="underline-offset-2 underline text-lg cursor-pointer" onClick={() => router.push(`/${locale}`)}>View Store Information</p>
+            <div className="mt-2 text-gray-800 ml-7 md:ml-8">
+              <p 
+                className="underline-offset-2 underline text-base md:text-lg cursor-pointer hover:text-gray-600 transition-colors" 
+                onClick={() => {
+                  const locationSection = document.getElementById('location');
+                  if (locationSection) {
+                    locationSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+              >
+                View Store Information
+              </p>
+            </div>
+            
+            {/** Share Section */}
+            <div className="mb-8 mt-8 flex gap-2">
+              <h4 className="mb-4 text-gray-900 font-medium mr-2">Share</h4>
+              {/* Social media share buttons can be added here */}
+              <div className="flex gap-4">
+                {/* use the same svgs for facebook and whatsapp */}
+                <FacebookIcon 
+                  className="h-5 w-5 text-gray-600 hover:text-blue-600 cursor-pointer transition-colors" 
+                  onClick={() => handleShare('facebook')}
+                />
+                <WhatsAppIcon 
+                  className="h-5 w-5 text-gray-600 hover:text-green-600 cursor-pointer transition-colors" 
+                  onClick={() => handleShare('whatsapp')}
+                />
+                <InstagramIcon 
+                  className="h-5 w-5 text-gray-600 hover:text-pink-600 cursor-pointer transition-colors" 
+                  onClick={() => handleShare('instagram')}
+                />
+              </div>
             </div>
 
             {/* Accordion Sections */}
-            <div className="border-t border-gray-200 mt-12 pt-8">
+            <div className="border-t border-gray-200 mt-8 md:mt-12 pt-6 md:pt-8">
               {/* Features Accordion */}
               {product.features && product.features.length > 0 && (
                 <AccordionItem title="Description" defaultOpen={true}>

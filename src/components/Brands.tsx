@@ -1,4 +1,3 @@
-// Relative path: /src/components/Brands.tsx
 'use client';
 import React from 'react';
 import { BrandList } from '@/app/data/brands';
@@ -6,13 +5,12 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
 export default function BrandsSection() {
   return (
-    <section className="w-full max-w-[1440px] mx-auto lg:px-0 px-4 py-32 bg-white">
+    <section className="w-full max-w-[1440px] mx-auto lg:px-0 px-4 py-40 bg-white">
       <div className="mb-12 text-center">
         <h2 className="text-[32px] font-medium text-gray-900 tracking-wide">
           Shop from {BrandList.length}+ Trusted Brands
