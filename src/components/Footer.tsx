@@ -175,7 +175,7 @@ const FooterBottom = () => {
   const { lang } = useParams();
 
   return (
-    <div className={`px-4 md:px-8 w-full flex flex-col gap-6 mt-auto`}>
+    <div className={`px-4 md:px-8 w-full flex flex-col gap-6 mt-8 md:mt-12`}>
       {/* Icons Container - Mobile: stacked, Desktop: same row */}
       <div className="flex flex-col md:flex-row items-center md:items-center md:justify-between gap-6">
         {/* Social media icons - left on desktop */}

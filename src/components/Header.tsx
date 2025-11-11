@@ -65,9 +65,39 @@ export default function Header() {
 function SearchBar() {
   const [ query, setQuery ] = React.useState('');
   const results = ProductList.filter((product: Product) => product.name.toLowerCase().includes(query.toLowerCase()));
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
 
   const params = useParams();
   const lang = params.lang || 'en';
+  
+  // Prevent scroll propagation to the page when scrolling in the dropdown
+  React.useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      const dropdown = dropdownRef.current;
+      if (!dropdown) return;
+
+      const isScrollable = dropdown.scrollHeight > dropdown.clientHeight;
+      if (!isScrollable) return;
+
+      const isAtTop = dropdown.scrollTop === 0;
+      const isAtBottom = dropdown.scrollTop + dropdown.clientHeight >= dropdown.scrollHeight;
+
+      if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
+        // Allow scroll to propagate only when at boundaries
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+      dropdown.scrollTop += e.deltaY;
+    };
+
+    const dropdown = dropdownRef.current;
+    if (dropdown) {
+      dropdown.addEventListener('wheel', handleWheel, { passive: false });
+      return () => dropdown.removeEventListener('wheel', handleWheel);
+    }
+  }, [query, results.length]);
   
   return (
     <div className="relative flex items-center bg-lavender rounded-lg max-w-4xl">
@@ -82,7 +112,11 @@ function SearchBar() {
         className="w-full text-gray-900 border-gray-200 bg-white rounded-md pl-10 pr-4 py-2  focus:ring-1 focus:ring-gray-900 focus:border-transparent transition-all duration-500"
       />
       {query && results.length > 0 && (
-        <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md mt-1 max-h-60 overflow-y-auto z-10 shadow-lg">
+        <div 
+          ref={dropdownRef}
+          className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md mt-1 max-h-60 overflow-y-auto z-10 shadow-lg scrollbar-thin"
+          onWheel={(e) => e.stopPropagation()}
+        >
           {results.map((product) => (
             <Link
               key={product.id}
@@ -135,6 +169,7 @@ function SearchIconButton({ onClick }: { onClick: () => void }) {
 function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [query, setQuery] = React.useState('');
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const resultsRef = React.useRef<HTMLDivElement>(null);
   const params = useParams();
   const lang = params.lang || 'en';
   const results = ProductList.filter((product: Product) => 
@@ -156,6 +191,34 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
       document.body.style.overflow = '';
     };
   }, [isOpen]);
+
+  // Prevent scroll propagation in results area
+  React.useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      const resultsDiv = resultsRef.current;
+      if (!resultsDiv) return;
+
+      const isScrollable = resultsDiv.scrollHeight > resultsDiv.clientHeight;
+      if (!isScrollable) return;
+
+      const isAtTop = resultsDiv.scrollTop === 0;
+      const isAtBottom = resultsDiv.scrollTop + resultsDiv.clientHeight >= resultsDiv.scrollHeight;
+
+      if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+      resultsDiv.scrollTop += e.deltaY;
+    };
+
+    const resultsDiv = resultsRef.current;
+    if (resultsDiv) {
+      resultsDiv.addEventListener('wheel', handleWheel, { passive: false });
+      return () => resultsDiv.removeEventListener('wheel', handleWheel);
+    }
+  }, [query, results.length]);
 
   return (
     <div 
@@ -192,7 +255,11 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
 
         {/* Results */}
         {query && (
-          <div className="max-h-96 overflow-y-auto">
+          <div 
+            ref={resultsRef}
+            className="max-h-96 overflow-y-auto scrollbar-thin"
+            onWheel={(e) => e.stopPropagation()}
+          >
             {results.length > 0 ? (
               results.map((product) => (
                 <Link
