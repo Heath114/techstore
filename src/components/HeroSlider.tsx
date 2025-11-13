@@ -9,7 +9,6 @@ import React from 'react';
 import { ItemList } from '@/app/data/items';
 import { useRouter } from 'next/navigation';
 
-
 type Slide = {
   id: number;
   title: string;
@@ -74,7 +73,7 @@ function ProHeroSlider() {
           speed={900}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
-          className="h-[120vh] pro-swiper"
+          className="h-[calc(70vh-70px)] sm:h-[100vh] 2xl:h-[120vh] pro-swiper"
         >
           {slides.map((s, i) => (
             <SwiperSlide key={s.id}>
@@ -95,7 +94,7 @@ function ProHeroSlider() {
                 <div className="absolute inset-0 flex items-center">
                   <div className="max-w-7xl mx-auto w-full px-8">
                     <div className="max-w-xl">
-                      <h2 className="text-white text-1xl sm:text-2xl lg:text-3xl font-semibold tracking-tight">
+                      <h2 className="text-white text-xl sm:text-2xl lg:text-3xl font-normal 2xl:font-semibold tracking-tight">
                         {s.title}
                       </h2>
                       <p className="mt-3 text-white/90 text-sm sm:text-base lg:text-xl leading-relaxed">
@@ -104,7 +103,7 @@ function ProHeroSlider() {
                       {s.ctaText && s.ctaHref && (
                         <Link
                           href={s.ctaHref}
-                          className="inline-flex mt-5 items-center bg-white/90 hover:bg-white transition px-12 py-2.5 text-xl font-medium text-gray-900 backdrop-blur"
+                          className="inline-flex mt-5 items-center bg-white/90 hover:bg-white transition px-6 py-2 2xl:px-12 2xl:py-2.5 2xl:text-xl text-sm font-medium text-gray-900 backdrop-blur"
                         >
                           {s.ctaText}
                         </Link>

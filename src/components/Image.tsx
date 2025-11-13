@@ -41,35 +41,71 @@ export default function Photo() {
     }, []);
 
     return (
-        <div className="flex" ref={containerRef}>
-            <div className="photo-block w-[25%] h-[65vh] my-20 relative ml-56">
-                <Image 
-                    src="/slider/ht.webp" 
-                    alt="Photo" 
-                    fill 
-                    className="object-cover"
-                    priority
-                />
+        <div ref={containerRef}>
+            {/* Mobile/Tablet Layout - Stacked */}
+            <div className="flex flex-col gap-6 px-4 py-12 2xl:hidden">
+                <div className="photo-block w-full h-[40vh] relative">
+                    <Image 
+                        src="/slider/ht.webp" 
+                        alt="Photo" 
+                        fill 
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+
+                <div className="photo-block w-full h-[40vh] relative">
+                    <Image 
+                        src="/slider/ht.webp" 
+                        alt="Photo" 
+                        fill 
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+                
+                <div className="photo-block w-full h-[40vh] relative">
+                    <Image 
+                        src="/slider/ht.webp" 
+                        alt="Photo" 
+                        fill 
+                        className="object-cover"
+                        priority
+                    />
+                </div>
             </div>
 
-            <div className="photo-block w-[18%] h-[50vh] my-80 relative ml-52">
-                <Image 
-                    src="/slider/ht.webp" 
-                    alt="Photo" 
-                    fill 
-                    className="object-cover"
-                    priority
-                />
-            </div>
-            
-            <div className="photo-block w-[18%] h-[50vh] mt-80 relative ml-[2px]">
-                <Image 
-                    src="/slider/ht.webp" 
-                    alt="Photo" 
-                    fill 
-                    className="object-cover"
-                    priority
-                />
+            {/* Desktop Layout - Original Design */}
+            <div className="hidden 2xl:flex">
+                <div className="photo-block w-[25%] h-[65vh] my-20 relative ml-56">
+                    <Image 
+                        src="/slider/ht.webp" 
+                        alt="Photo" 
+                        fill 
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+
+                <div className="photo-block w-[18%] h-[50vh] my-80 relative ml-52">
+                    <Image 
+                        src="/slider/ht.webp" 
+                        alt="Photo" 
+                        fill 
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+                
+                <div className="photo-block w-[18%] h-[50vh] mt-80 relative ml-[2px]">
+                    <Image 
+                        src="/slider/ht.webp" 
+                        alt="Photo" 
+                        fill 
+                        className="object-cover"
+                        priority
+                    />
+                </div>
             </div>
         </div>
     );

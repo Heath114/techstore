@@ -18,6 +18,7 @@ export function ProductGallery({ mainImage, images, productName }: ProductGaller
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
   const imageRef = useRef<HTMLDivElement>(null);
   const allImages = [mainImage, ...images];
+  const isMobile = typeof window !== 'undefined' && /Mobi|Android/i.test(navigator.userAgent);
 
   // Lock body scroll when fullscreen is open
   useEffect(() => {
@@ -140,7 +141,7 @@ export function ProductGallery({ mainImage, images, productName }: ProductGaller
           </button>
 
           {/* Left sidebar with small thumbnail icons */}
-          {allImages.length > 1 && (
+          {allImages.length > 1 && !isMobile && (
             <div 
               className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 flex flex-col gap-2 md:gap-3"
               onClick={(e) => e.stopPropagation()}

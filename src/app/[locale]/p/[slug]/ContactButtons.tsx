@@ -63,7 +63,7 @@ export function ContactButtons({ productName }: ContactButtonsProps) {
           href={smsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex w-full text-base md:text-lg items-center justify-center gap-2 md:gap-3 rounded-lg bg-blue-500 px-4 md:px-6 py-2.5 md:py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-blue-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="flex w-full text-base md:text-lg items-center justify-center gap-2 md:gap-3 bg-blue-500 px-4 md:px-6 py-2.5 md:py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-blue-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           <MessageIcon className="h-5 w-5 md:h-6 md:w-6" />
           or Send an iMessage/SMS

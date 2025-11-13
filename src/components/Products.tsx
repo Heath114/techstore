@@ -35,7 +35,7 @@ export default function ProductsSection() {
         <section className="w-full max-w-[1440px] mx-auto lg:px-0 px-4 py-16 bg-white"
  id="deals">
             <div className="">
-                <h3 className="text-[32px] font-medium text-gray-900 mb-12 tracking-wide">BESTSELLERS</h3>
+                <h3 className="text-2xl 2xl:text-[32px] font-medium text-gray-900 mb-12 tracking-wide">BESTSELLERS</h3>
                 <div className="relative">
                     <Swiper
                         modules={[Autoplay, Pagination, Navigation]}

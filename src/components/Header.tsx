@@ -3,25 +3,56 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Search, X } from 'lucide-react';
+import { Phone, Search, X, Menu, ChevronRight } from 'lucide-react';
 import { ProductList } from '@/app/data/products'; 
 import type { Product } from '@/app/data/products';
 import { useParams } from 'next/navigation';
-import { ChevronRight } from 'lucide-react';
 
 export default function Header() {
-  const params = useParams();
-  const lang = params.lang || 'en';
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
     // The header is fixed to the top of the viewport.
-    <header className="bg-white fixed py-4 px-4 md:px-8 lg:px-16 w-full z-50 top-0 left-0">
-      <div className="grid grid-cols-3 items-center border-b border-gray-300 py-1 gap-4">
-        {/* Left: Logo on mobile, Search Bar on desktop */}
+    <header className="bg-white fixed inset-x-0 py-4 px-4 md:px-8 lg:px-16 w-full z-50 top-0">
+      {/* Mobile Layout */}
+      <div className="md:hidden flex items-center justify-between">
+        {/* Left: Menu & Search */}
+        <div className="flex items-center gap-2">
+          <MenuButton onClick={() => setIsMenuOpen(true)} />
+          <SearchIconButton onClick={() => setIsSearchOpen(true)} />
+        </div>
+        
+        {/* Center: Logo */}
+        <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+          <Image 
+            src="/images/logos/logo.avif" 
+            alt="TechShop Logo" 
+            width={100} 
+            height={33}
+            priority
+          />
+        </Link>
+        
+        {/* Right: Language & Call */}
+        <div className="flex items-center  gap-2">
+          <LanguageButton />
+          <CallUsButton />
+        </div>
+      </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden md:grid grid-cols-3 items-center py-1 gap-4">
+        {/* Left: Search Bar */}
         <div className="flex justify-start">
-          {/* Logo - visible on mobile, hidden on desktop */}
-          <Link href="/" className="md:hidden">
+          <div className="max-w-xl w-full">
+            <SearchBar />
+          </div>
+        </div>
+        
+        {/* Center: Logo */}
+        <div className="flex justify-center">
+          <Link href="/">
             <Image 
               src="/images/logos/logo.png" 
               alt="TechShop Logo" 
@@ -30,34 +61,19 @@ export default function Header() {
               priority
             />
           </Link>
-          {/* Search Bar - hidden on mobile, visible on desktop */}
-          <div className="max-w-xl w-full hidden md:block">
-            <SearchBar />
-          </div>
         </div>
 
-        {/* Center: Logo (desktop only) */}
-        <div className="hidden md:flex justify-center">
-          <Link href="/">
-            <Image 
-              src="/images/logos/logo.png" 
-              alt="TechShop Logo" 
-              width={120} 
-              height={40} 
-              priority // Add priority for LCP (Largest Contentful Paint) optimization
-            />
-          </Link>
-        </div>
-
-        {/* Right: Search Icon & Call Button */}
-        <div className="flex items-center gap-3 justify-end col-span-2 md:col-span-1">
-          <SearchIconButton onClick={() => setIsSearchOpen(true)} />
+        {/* Right: Call Button */}
+        <div className="flex items-center justify-end">
           <CallUsButton />
         </div>
       </div>
       
       {/* Search Modal */}
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      
+      {/* Mobile Menu */}
+      <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </header>
   );
 }
@@ -159,9 +175,9 @@ function SearchIconButton({ onClick }: { onClick: () => void }) {
     <button
       onClick={onClick}
       aria-label="Search"
-      className="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 bg-gray-900 text-white rounded-md transition-all duration-300 hover:bg-gray-800 hover:shadow-lg md:hidden"
+      className="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 bg-white text-gray-900 rounded-md transition-all duration-300 hover:bg-gray-50 hover:shadow-lg"
     >
-      <Search size={18} />
+      <Search size={24} />
     </button>
   );
 }
@@ -319,10 +335,131 @@ function CallUsButton() {
     <Link
       href="#contact"
       aria-label="Call us"
-      className="flex-shrink-0 inline-flex items-center justify-center gap-2 w-10 h-10 md:w-auto md:px-6 bg-gray-900 text-white rounded-md transition-all duration-300 hover:bg-gray-800 hover:shadow-lg"
+      className="flex-shrink-0 inline-flex items-center justify-center gap-2 w-10 h-10 md:w-auto md:px-6 bg-white text-gray-900 rounded-md transition-all duration-300 hover:bg-gray-50 hover:shadow-lg"
     >
-      <Phone size={18} />
+      <Phone size={24} />
       <span className="hidden lg:inline font-medium">Contact Us</span>
     </Link>
+  );
+}
+
+function MenuButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      aria-label="Menu"
+      className="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 bg-white text-gray-900 rounded-md transition-all duration-300 hover:bg-gray-50 hover:shadow-lg"
+    >
+      <Menu size={24} />
+    </button>
+  );
+}
+
+function LanguageButton() {
+  const params = useParams();
+  const currentLang = params.locale || 'en';
+  const displayLang = currentLang.toString().toUpperCase();
+
+  return (
+    <button
+      aria-label="Change language"
+      className="flex-shrink-0 inline-flex items-center justify-center gap-1 px-3 h-10 bg-white text-gray-900 rounded-md transition-all duration-300 hover:bg-gray-50 hover:shadow-lg"
+    >
+      <span className="text-sm font-medium">{displayLang}</span>
+      <ChevronRight size={20} />
+    </button>
+  );
+}
+
+function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  // Lock body scroll when modal is open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  return (
+    <div 
+      className={`fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 ${
+        isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}
+      onClick={onClose}
+    >
+      <div 
+        className={`fixed left-0 top-0 bottom-0 w-64 bg-white shadow-2xl transition-transform duration-300 ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Menu Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
+          <button
+            onClick={onClose}
+            className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+            aria-label="Close menu"
+          >
+            <X size={20} className="text-gray-500" />
+          </button>
+        </div>
+
+        {/* Menu Items */}
+        <nav className="p-4">
+          <ul className="space-y-2">
+            <li>
+              <Link
+                href="/"
+                onClick={onClose}
+                className="block px-4 py-3 text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/products"
+                onClick={onClose}
+                className="block px-4 py-3 text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+              >
+                Products
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/brands"
+                onClick={onClose}
+                className="block px-4 py-3 text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+              >
+                Brands
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about"
+                onClick={onClose}
+                className="block px-4 py-3 text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                onClick={onClose}
+                className="block px-4 py-3 text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   );
 }
