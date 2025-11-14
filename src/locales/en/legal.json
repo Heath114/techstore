@@ -1,0 +1,200 @@
+{
+  "terms": {
+    "title": "Terms of Service",
+    "last_updated": "Last Updated: November 2025",
+    "intro": "Please read these terms of service carefully before using our website.",
+    "acceptance": {
+      "title": "1. Acceptance of Terms",
+      "content": "By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement."
+    },
+    "use_license": {
+      "title": "2. Use License",
+      "content": "Permission is granted to temporarily download one copy of the materials on our website for personal, non-commercial transitory viewing only."
+    },
+    "disclaimer": {
+      "title": "3. Disclaimer",
+      "content": "The materials on our website are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights."
+    },
+    "limitations": {
+      "title": "4. Limitations",
+      "content": "In no event shall our company or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website."
+    },
+    "privacy": {
+      "title": "5. Privacy Policy",
+      "content": "Your use of our website is also governed by our Privacy Policy. Please review our Privacy Policy, which also governs the site and informs users of our data collection practices."
+    },
+    "changes": {
+      "title": "6. Changes to Terms",
+      "content": "We reserve the right to modify these terms of service at any time. By continuing to use the website after changes are posted, you agree to be bound by the revised terms."
+    },
+    "contact": {
+      "title": "7. Contact Information",
+      "content": "If you have any questions about these Terms of Service, please contact us."
+    }
+  },
+  "shipping": {
+    "title": "Shipping Policy",
+    "last_updated": "Last Updated: November 2025",
+    "intro": "We are committed to delivering your order accurately, in good condition, and on time.",
+    "processing": {
+      "title": "1. Processing Time",
+      "content": "Orders are processed within 1-2 business days. Orders are not shipped or delivered on weekends or holidays."
+    },
+    "rates": {
+      "title": "2. Shipping Rates & Delivery",
+      "content": "Shipping charges for your order will be calculated and displayed at checkout. Delivery times vary depending on your location.",
+      "standard": "Standard Shipping: 5-7 business days",
+      "express": "Express Shipping: 2-3 business days",
+      "overnight": "Overnight Shipping: 1 business day"
+    },
+    "tracking": {
+      "title": "3. Order Tracking",
+      "content": "Once your order has shipped, you will receive a shipping confirmation email with tracking information."
+    },
+    "international": {
+      "title": "4. International Shipping",
+      "content": "We currently ship to select countries. International orders may be subject to import duties and taxes, which are the responsibility of the customer."
+    },
+    "damages": {
+      "title": "5. Damages",
+      "content": "If your order arrives damaged, please contact us within 48 hours of delivery with photos of the damaged items and packaging."
+    }
+  },
+  "refund": {
+    "title": "Refund Policy",
+    "last_updated": "Last Updated: November 2025",
+    "intro": "We want you to be completely satisfied with your purchase.",
+    "returns": {
+      "title": "1. Return Period",
+      "content": "You have 30 days from the date of delivery to return most items for a full refund."
+    },
+    "conditions": {
+      "title": "2. Return Conditions",
+      "content": "Items must be unused, in original packaging, and in the same condition as received. Items must include all original tags and accessories.",
+      "list_title": "Items that cannot be returned:",
+      "list": [
+        "Opened software or digital products",
+        "Items marked as final sale",
+        "Gift cards",
+        "Personalized or custom items"
+      ]
+    },
+    "process": {
+      "title": "3. Return Process",
+      "content": "To initiate a return, please contact our customer service team. We will provide you with a return authorization number and instructions.",
+      "step1": "Contact customer service",
+      "step2": "Receive return authorization",
+      "step3": "Ship item back to us",
+      "step4": "Receive refund confirmation"
+    },
+    "refund_time": {
+      "title": "4. Refund Timeline",
+      "content": "Once we receive your return, please allow 5-7 business days for processing. Refunds will be credited to your original payment method."
+    },
+    "exchanges": {
+      "title": "5. Exchanges",
+      "content": "If you need to exchange an item, please contact us. We will arrange for the exchange at no additional shipping cost."
+    },
+    "shipping_cost": {
+      "title": "6. Return Shipping Costs",
+      "content": "Customers are responsible for return shipping costs unless the item is defective or we made an error."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "intro": "Find answers to common questions about our products and services.",
+    "ordering": {
+      "title": "Ordering",
+      "q1": {
+        "question": "How do I place an order?",
+        "answer": "Browse our products, add items to your cart, and proceed to checkout. You'll need to provide shipping information and payment details."
+      },
+      "q2": {
+        "question": "Can I modify or cancel my order?",
+        "answer": "Contact us immediately if you need to modify or cancel your order. If it hasn't been processed yet, we can make changes."
+      },
+      "q3": {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept all major credit cards, PayPal, Apple Pay, Google Pay, and other secure payment methods."
+      }
+    },
+    "shipping_faq": {
+      "title": "Shipping & Delivery",
+      "q1": {
+        "question": "How long will my order take to arrive?",
+        "answer": "Standard shipping takes 5-7 business days. Express shipping is available for 2-3 days delivery."
+      },
+      "q2": {
+        "question": "Do you ship internationally?",
+        "answer": "Yes, we ship to select countries worldwide. International shipping times vary by destination."
+      },
+      "q3": {
+        "question": "How can I track my order?",
+        "answer": "You'll receive a tracking number via email once your order ships. Use this to track your package."
+      }
+    },
+    "returns_faq": {
+      "title": "Returns & Refunds",
+      "q1": {
+        "question": "What is your return policy?",
+        "answer": "We offer 30-day returns on most items. Items must be unused and in original packaging."
+      },
+      "q2": {
+        "question": "How long do refunds take?",
+        "answer": "Refunds are processed within 5-7 business days after we receive your return."
+      },
+      "q3": {
+        "question": "Who pays for return shipping?",
+        "answer": "Customers pay for return shipping unless the item is defective or we made an error."
+      }
+    },
+    "products_faq": {
+      "title": "Products",
+      "q1": {
+        "question": "Are your products authentic?",
+        "answer": "Yes, all our products are 100% authentic and sourced directly from authorized distributors."
+      },
+      "q2": {
+        "question": "Do products come with warranty?",
+        "answer": "Yes, all products include manufacturer warranty. Warranty terms vary by product."
+      },
+      "q3": {
+        "question": "Can I see products in person?",
+        "answer": "Yes, visit our physical store location. See our Store Location page for address and hours."
+      }
+    }
+  },
+  "location": {
+    "title": "Store Location",
+    "visit_us": "Visit Our Store",
+    "intro": "Come visit us at our physical location. Our team is ready to help you find the perfect products.",
+    "address": {
+      "title": "Address",
+      "street": "123 Tech Avenue",
+      "city": "Downtown District",
+      "country": "United States",
+      "postal": "12345"
+    },
+    "hours": {
+      "title": "Store Hours",
+      "weekdays": "Monday - Friday: 9:00 AM - 6:00 PM",
+      "saturday": "Saturday: 10:00 AM - 4:00 PM",
+      "sunday": "Sunday: Closed"
+    },
+    "contact": {
+      "title": "Contact Information",
+      "phone": "Phone: +1 (555) 123-4567",
+      "email": "Email: info@techstore.com",
+      "whatsapp": "WhatsApp: +1 (555) 123-4567"
+    },
+    "directions": "Get Directions",
+    "parking": {
+      "title": "Parking",
+      "content": "Free parking available in our building's garage. Enter from Tech Avenue."
+    },
+    "public_transport": {
+      "title": "Public Transportation",
+      "content": "Easily accessible by bus and metro. Nearest station: Tech Center (5 min walk)."
+    }
+  }
+}

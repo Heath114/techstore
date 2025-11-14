@@ -7,14 +7,19 @@ import { Phone, Search, X, Menu, ChevronRight } from 'lucide-react';
 import { ProductList } from '@/app/data/products'; 
 import type { Product } from '@/app/data/products';
 import { useParams } from 'next/navigation';
+import { getTranslations } from '@/lib/i18n';
+import { Locale } from '@/locales/business-config';
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const params = useParams();
+  const locale = (params.locale as Locale) || 'en';
+  const t = getTranslations(locale, 'common');
 
   return (
     // The header is fixed to the top of the viewport.
-    <header className="bg-white fixed inset-x-0 py-4 md:py-1 lg:py-1 2xl:py-1.5 px-4 md:px-8 lg:px-12 2xl:px-16 w-full z-50 top-0">
+    <header className="bg-white fixed inset-x-0 py-4 md:py-1 lg:py-0.5 2xl:py-0 px-4 md:px-8 lg:px-12 2xl:px-16 w-full z-50 top-0">
 
 
       {/* Mobile Layout */}
@@ -87,7 +92,8 @@ function SearchBar() {
   const dropdownRef = React.useRef<HTMLDivElement>(null);
 
   const params = useParams();
-  const lang = params.lang || 'en';
+  const locale = (params.locale as Locale) || 'en';
+  const t = getTranslations(locale, 'common');
   
   // Prevent scroll propagation to the page when scrolling in the dropdown
   React.useEffect(() => {
@@ -127,7 +133,7 @@ function SearchBar() {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search products..."
+        placeholder={t.search.placeholder}
         className="w-full text-gray-900 border-gray-200 bg-white pl-10 pr-4 py-2  focus:ring-1 focus:ring-gray-900 focus:border-transparent transition-all duration-500"
       />
       {query && results.length > 0 && (
@@ -139,7 +145,7 @@ function SearchBar() {
           {results.map((product) => (
             <Link
               key={product.id}
-              href={`/${lang}/p/${product.slug}`}
+              href={`/${locale}/p/${product.slug}`}
               onClick={() => setQuery('')} 
               className="block"
             >
@@ -190,7 +196,8 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
   const inputRef = React.useRef<HTMLInputElement>(null);
   const resultsRef = React.useRef<HTMLDivElement>(null);
   const params = useParams();
-  const lang = params.lang || 'en';
+  const locale = (params.locale as Locale) || 'en';
+  const t = getTranslations(locale, 'common');
   const results = ProductList.filter((product: Product) => 
     product.name.toLowerCase().includes(query.toLowerCase())
   );
@@ -260,13 +267,13 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search products..."
+            placeholder={t.search.placeholder}
             className="w-full text-gray-900 text-lg bg-transparent pl-12 pr-16 py-4 focus:outline-none placeholder:text-gray-400 placeholder:font-light"
           />
           <button
             onClick={onClose}
             className="absolute right-10 md:right-12 p-2 hover:bg-gray-100 transition-all duration-300"
-            aria-label="Close search"
+            aria-label={t.search.close}
           >
             <X size={22} className="text-gray-500" />
           </button>
@@ -283,7 +290,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               results.map((product) => (
                 <Link
                   key={product.id}
-                  href={`/${lang}/p/${product.slug}`}
+                  href={`/${locale}/p/${product.slug}`}
                   onClick={() => {
                     setQuery('');
                     onClose();
@@ -316,7 +323,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               ))
             ) : (
               <div className="p-12 text-center text-gray-400 font-light">
-                No products found
+                {t.search.no_results}
               </div>
             )}
           </div>
@@ -325,7 +332,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
         {/* Empty state */}
         {!query && (
           <div className="p-12 text-center text-gray-400 font-light tracking-wide">
-            Start typing to search products...
+            {t.search.start_typing}
           </div>
         )}
       </div>
@@ -334,23 +341,31 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
 }
 
 function CallUsButton() {
+  const params = useParams();
+  const locale = (params.locale as Locale) || 'en';
+  const t = getTranslations(locale, 'common');
+  
   return (
     <Link
       href="#contact"
-      aria-label="Call us"
+      aria-label={t.contact.call_us}
       className="flex-shrink-0 inline-flex items-center justify-center gap-2 w-10 h-10 md:w-auto md:px-6 bg-white text-gray-900 rounded-md transition-all duration-300 hover:bg-gray-50 hover:shadow-lg"
     >
       <Phone size={24} />
-      <span className="hidden lg:inline font-medium">Contact Us</span>
+      <span className="hidden lg:inline font-medium">{t.header.contact_us}</span>
     </Link>
   );
 }
 
 function MenuButton({ onClick }: { onClick: () => void }) {
+  const params = useParams();
+  const locale = (params.locale as Locale) || 'en';
+  const t = getTranslations(locale, 'common');
+  
   return (
     <button
       onClick={onClick}
-      aria-label="Menu"
+      aria-label={t.header.menu}
       className="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 bg-white text-gray-900 rounded-md transition-all duration-300 hover:bg-gray-50 hover:shadow-lg"
     >
       <Menu size={24} />
@@ -362,19 +377,25 @@ function LanguageButton() {
   const params = useParams();
   const currentLang = params.locale || 'en';
   const displayLang = currentLang.toString().toUpperCase();
+  const t = getTranslations(currentLang as Locale, 'common');
 
   return (
-    <button
-      aria-label="Change language"
+    <Link
+      href={currentLang === 'en' ? '/ar' : '/en'}
+      aria-label={t.header.language}
       className="flex-shrink-0 inline-flex items-center justify-center gap-1 px-3 h-10 bg-white text-gray-900 rounded-md transition-all duration-300 hover:bg-gray-50 hover:shadow-lg"
     >
       <span className="text-sm font-medium">{displayLang}</span>
       <ChevronRight size={20} />
-    </button>
+    </Link>
   );
 }
 
 function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const params = useParams();
+  const locale = (params.locale as Locale) || 'en';
+  const t = getTranslations(locale, 'common');
+  
   // Lock body scroll when modal is open
   React.useEffect(() => {
     if (isOpen) {

@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "brands": "Brands",
+    "about": "About",
+    "contact": "Contact",
+    "deals": "Deals"
+  },
+  "header": {
+    "search_placeholder": "Search products...",
+    "contact_us": "Contact Us",
+    "language": "Language",
+    "menu": "Menu"
+  },
+  "search": {
+    "placeholder": "Search products...",
+    "no_results": "No products found",
+    "start_typing": "Start typing to search products...",
+    "close": "Close search"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "You can call us any time.",
+    "get_directions": "Get Directions",
+    "make_call": "Make a Call",
+    "call_us": "Call Us",
+    "whatsapp": "WhatsApp",
+    "email": "Email Us",
+    "location": "Our Location"
+  },
+  "footer": {
+    "support": "Support",
+    "quick_links": "Quick Links",
+    "opening_hours": "Opening Hours",
+    "terms_service": "Terms of Service",
+    "shipping_policy": "Shipping Policy",
+    "refund_policy": "Refund Policy",
+    "faq": "FAQ",
+    "store_location": "Store Location",
+    "home": "Home",
+    "deals": "Deals",
+    "contact": "Contact",
+    "mon_fri": "Mon-Fri: 9am - 6pm",
+    "saturday": "Sat: 10am - 4pm",
+    "sunday": "Sun: Closed",
+    "rights_reserved": "All rights reserved",
+    "techshop": "TECHSHOP"
+  },
+  "subscribe": {
+    "title": "Join our Deals List",
+    "subtitle": "Join our email list for exclusive offers and early access to sales.",
+    "phone_placeholder": "Enter phone number",
+    "submit": "Submit",
+    "success": "Success! You are now subscribed to our deals list.",
+    "error_empty": "Please enter a phone number",
+    "error_invalid": "Please enter a valid phone number (at least 10 digits)",
+    "error_general": "Something went wrong. Please try again.",
+    "submitting": "Submitting..."
+  },
+  "products": {
+    "bestsellers": "BESTSELLERS",
+    "our_products": "OUR PRODUCTS",
+    "all_products": "All Products",
+    "from": "From",
+    "on_sale": "ON SALE",
+    "related_products": "Related Products",
+    "view_all": "View All"
+  },
+  "why": {
+    "title": "Why choose to buy from This Techshop?",
+    "customer_service": {
+      "title": "Excellent customer service",
+      "description": "Support team ready to answer all your questions and assist you."
+    },
+    "track_order": {
+      "title": "Track your order with ease",
+      "description": "Stay informed on the status of your question one step closer to getting it resolved."
+    },
+    "returns": {
+      "title": "Easy returns and exchanges",
+      "description": "We offer a flexible return and exchange policy to ensure your complete satisfaction."
+    },
+    "best_offers": {
+      "title": "Best offers and prices",
+      "description": "Discover unique products at the lowest prices with quality assurance."
+    },
+    "payment": {
+      "title": "Various payment options",
+      "description": "Enjoy flexible payment methods that suit your needs and make your purchases easier."
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "close": "Close",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  }
+}

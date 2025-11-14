@@ -18,25 +18,31 @@ import {
   AmexIcon,
   GooglePayIcon
 } from '@/app/data/icons';
+import { getTranslations } from '@/lib/i18n';
+import { Locale } from '@/locales/business-config';
 
 function AboveFooter() {
+  const params = useParams();
+  const locale = (params.locale as Locale) || 'en';
+  const t = getTranslations(locale, 'common');
+  
   return (
     <section className="flex flex-col bg-gray-900 py-8 md:py-12 px-4 md:px-8 lg:px-40 border-b border-gray-800" id="contact">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl md:text-3xl font-medium text-gray-400">Contact Us</h1>
-          <p className="text-sm md:text-base text-white">You can call us any time.</p>
+          <h1 className="text-xl md:text-xl lg:text-2xl font-medium text-gray-400">{t.contact.title}</h1>
+          <p className="text-xs md:text-xs lg:text-sm text-white">{t.contact.subtitle}</p>
         </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 md:gap-4 w-full sm:w-auto">
           <button
-            className="bg-white text-sm md:text-base font-medium py-2.5 md:py-3 px-4 md:px-6 hover:bg-gray-300 text-gray-900 cursor-pointer transition-colors duration-300 whitespace-nowrap"
+            className="bg-white text-xs md:text-xs lg:text-sm font-medium py-2 md:py-2 lg:py-2.5 px-3 md:px-4 lg:px-5 hover:bg-gray-300 text-gray-900 cursor-pointer transition-colors duration-300 whitespace-nowrap"
             onClick={() => window.open('https://www.google.com/maps', '_blank')}>
-              <Map className="inline mr-2 w-4 h-4"/> Get Directions
+              <Map className="inline mr-2 w-4 h-4"/> {t.contact.get_directions}
           </button>
           <button
-            className="bg-white text-sm md:text-base font-medium py-2.5 md:py-3 px-4 md:px-6 hover:bg-gray-300 text-gray-900 cursor-pointer transition-colors duration-300 whitespace-nowrap"
+            className="bg-white text-xs md:text-xs lg:text-sm font-medium py-2 md:py-2 lg:py-2.5 px-3 md:px-4 lg:px-5 hover:bg-gray-300 text-gray-900 cursor-pointer transition-colors duration-300 whitespace-nowrap"
             onClick={() => window.open('tel:203997333333')}>
-              <Phone className="inline mr-2 w-4 h-4"/> Make a Call
+              <Phone className="inline mr-2 w-4 h-4"/> {t.contact.make_call}
           </button>
         </div>
       </div>
@@ -46,8 +52,9 @@ function AboveFooter() {
 
 // Navigation section
 const FooterNav = () => {
-  const { lang } = useParams();
-  const currentLang = lang === 'ar' ? 'ar' : 'en';
+  const params = useParams();
+  const locale = (params.locale as Locale) || 'en';
+  const t = getTranslations(locale, 'common');
   const [openSections, setOpenSections] = React.useState<string[]>([]);
   const [isDesktop, setIsDesktop] = React.useState(false);
 
@@ -89,7 +96,7 @@ const FooterNav = () => {
           className="flex items-center justify-between w-full md:cursor-default"
         >
           <h3 className="mb-2 uppercase text-gray-400 font-medium text-sm sm:text-base md:text-lg tracking-wider">
-            Support
+            {t.footer.support}
           </h3>
           <span className="md:hidden text-gray-400 text-xl">
             {isSectionOpen('support') ? '−' : '+'}
@@ -98,20 +105,20 @@ const FooterNav = () => {
         <div className={`flex flex-col gap-2 md:gap-3 overflow-hidden transition-all duration-500 ease-in-out ${
           isSectionOpen('support') ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'
         }`}>
-          <Link href="#terms" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
-            Terms of Service
+          <Link href={`/${locale}/terms`} className="text-xs md:text-xs lg:text-sm text-gray-300 hover:text-white transition-colors duration-300 leading-relaxed">
+            {t.footer.terms_service}
           </Link>
-          <Link href="#shipping" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
-            Shipping Policy
+          <Link href={`/${locale}/shipping`} className="text-xs md:text-xs lg:text-sm text-gray-300 hover:text-white transition-colors duration-300 leading-relaxed">
+            {t.footer.shipping_policy}
           </Link>
-          <Link href="#refund" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
-            Refund Policy
+          <Link href={`/${locale}/refund`} className="text-xs md:text-xs lg:text-sm text-gray-300 hover:text-white transition-colors duration-300 leading-relaxed">
+            {t.footer.refund_policy}
           </Link>
-          <Link href="#faq" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
-            FAQ
+          <Link href={`/${locale}/faq`} className="text-xs md:text-xs lg:text-sm text-gray-300 hover:text-white transition-colors duration-300 leading-relaxed">
+            {t.footer.faq}
           </Link>
-          <Link href="#location" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
-            Store Location
+          <Link href={`/${locale}/location`} className="text-xs md:text-xs lg:text-sm text-gray-300 hover:text-white transition-colors duration-300 leading-relaxed">
+            {t.footer.store_location}
           </Link>
         </div>
       </div>
@@ -123,7 +130,7 @@ const FooterNav = () => {
           className="flex items-center justify-between w-full md:cursor-default"
         >
           <h3 className="mb-2 uppercase text-gray-400 font-medium text-sm sm:text-base md:text-lg tracking-wider">
-            Quick Links
+            {t.footer.quick_links}
           </h3>
           <span className="md:hidden text-gray-400 text-xl">
             {isSectionOpen('quick') ? '−' : '+'}
@@ -133,13 +140,13 @@ const FooterNav = () => {
           isSectionOpen('quick') ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'
         }`}>
           <Link href="#home" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
-            Home
+            {t.footer.home}
           </Link>
           <Link href="#deals" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
-            Deals
+            {t.footer.deals}
           </Link>
           <Link href="#contact" className="text-sm md:text-base text-gray-300 hover:text-white transition-colors duration-300">
-            Contact
+            {t.footer.contact}
           </Link>
         </div>
       </div>
@@ -151,7 +158,7 @@ const FooterNav = () => {
           className="flex items-center justify-between w-full md:cursor-default"
         >
           <h3 className="mb-2 uppercase text-gray-400 font-medium text-sm sm:text-base md:text-lg tracking-wider">
-            Opening Hours
+            {t.footer.opening_hours}
           </h3>
           <span className="md:hidden text-gray-400 text-xl">
             {isSectionOpen('hours') ? '−' : '+'}
@@ -160,9 +167,9 @@ const FooterNav = () => {
         <div className={`flex flex-col gap-2 md:gap-3 overflow-hidden transition-all duration-300 ease-in-out ${
           isSectionOpen('hours') ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'
         }`}>
-          <p className="text-sm md:text-base text-gray-300">Mon-Fri: 9am - 6pm</p>
-          <p className="text-sm md:text-base text-gray-300">Sat: 10am - 4pm</p>
-          <p className="text-sm md:text-base text-gray-300">Sun: Closed</p>
+          <p className="text-xs md:text-xs lg:text-sm text-gray-300 leading-relaxed">{t.footer.mon_fri}</p>
+          <p className="text-xs md:text-xs lg:text-sm text-gray-300 leading-relaxed">{t.footer.saturday}</p>
+          <p className="text-xs md:text-xs lg:text-sm text-gray-300 leading-relaxed">{t.footer.sunday}</p>
         </div>
       </div>
     </div>
@@ -172,7 +179,9 @@ const FooterNav = () => {
 
 // Bottom section with social links and copyright
 const FooterBottom = () => {
-  const { lang } = useParams();
+  const params = useParams();
+  const locale = (params.locale as Locale) || 'en';
+  const t = getTranslations(locale, 'common');
 
   return (
     <div className={`px-4 md:px-8 lg:px-12 2xl:px-16 w-full flex flex-col gap-6 mt-8 md:mt-10 lg:mt-12`}>
@@ -238,7 +247,7 @@ const FooterBottom = () => {
 
       {/* Copyright text - absolute bottom */}
       <div className="text-sm md:text-base lg:text-base text-gray-400 text-center mt-8 md:mt-10 lg:mt-12 pb-4">
-        © {new Date().getFullYear()} TechStore. All rights reserved.
+        © {new Date().getFullYear()} TechStore. {t.footer.rights_reserved}
       </div>
     </div>
   );
@@ -246,12 +255,13 @@ const FooterBottom = () => {
 
 
 function FooterContent() {
-  const { lang } = useParams();
+  const params = useParams();
+  const locale = (params.locale as Locale) || 'en';
 
   return (
     <div
       className="bg-gray-900 text-white pt-12 md:pt-16 px-4 w-full flex flex-col min-h-full"
-      dir={lang === 'ar' ? 'rtl' : 'ltr'}
+      dir={locale === 'ar' ? 'rtl' : 'ltr'}
     >
       <FooterNav />
       <div className="flex-1"></div>
