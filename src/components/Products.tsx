@@ -82,17 +82,28 @@ export default function ProductsSection() {
                                       h-full w-full border-r border-neutral-200 last:border-r-0"
                                     onClick={() => router.push(`/${locale}/p/${product.slug}`)}
                                 >
-                                <div className="aspect-[4/5] w-full bg-gray-50 flex items-center justify-center overflow-hidden mb-2">
+                                <div className="aspect-[4/5] w-full bg-gray-50 flex items-center justify-center overflow-hidden mb-2 relative">
+                                        {/* Main Image */}
                                         <Image
                                             src={product.image ?? '/images/products/placeholder.png'}
                                             alt={product.name}
                                             width={500}
                                             height={600}
-                                            className="w-full h-full object-contain"
+                                            className="w-full h-full object-contain transition-opacity duration-500 ease-in-out group-hover:opacity-0"
                                         />
+                                        {/* Hover Image - shows second image from images array if available */}
+                                        {product.images && product.images.length > 0 && (
+                                            <Image
+                                                src={product.images[0]}
+                                                alt={`${product.name} - alternate view`}
+                                                width={500}
+                                                height={600}
+                                                className="w-full h-full object-contain absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100"
+                                            />
+                                        )}
                                         {
                                             product.isSale && (
-                                                <div className="absolute top-2 left-2 bg-red-700 text-white px-[6px] py-[1px] text-[8px] 2xl:px-[8px] 2xl:py-[2px] 2xl:text-[10px]">
+                                                <div className="absolute top-2 left-2 bg-red-700 text-white px-[6px] py-[1px] text-[8px] 2xl:px-[8px] 2xl:py-[2px] 2xl:text-[10px] z-10">
                                                     {t.products.on_sale}
                                                 </div>
                                             )
