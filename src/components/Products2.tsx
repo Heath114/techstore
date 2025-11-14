@@ -142,10 +142,10 @@ export default function ProductsSection() {
                                             height={600}
                                             className="w-full h-full object-contain transition-opacity duration-500 ease-in-out group-hover:opacity-0"
                                         />
-                                        {/* Hover Image - shows second image from images array if available */}
-                                        {product.images && product.images.length > 0 && (
+                                        {/* Hover Image - shows hoverImage if available */}
+                                        {product.hoverImage && (
                                             <Image
-                                                src={product.images[0]}
+                                                src={product.hoverImage}
                                                 alt={`${product.name} - alternate view`}
                                                 width={500}
                                                 height={600}
