@@ -1,8 +1,16 @@
 .filterContainer {
     position: relative;
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     margin-bottom: 5px;
+    
+    @media (min-width: 640px) {
+        gap: 1.5rem;
+    }
+    
+    @media (min-width: 1536px) {
+        gap: 2rem;
+    }
 }
 
 .filterButton {
@@ -15,6 +23,15 @@
     font-weight: 400;
     color: #6b7280;
     transition: color 0.3s ease;
+    white-space: nowrap;
+    
+    @media (min-width: 640px) {
+        font-size: 0.875rem;
+    }
+    
+    @media (min-width: 1536px) {
+        font-size: 1rem;
+    }
     
     &:hover {
         color: #aeb5c2;

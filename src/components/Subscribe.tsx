@@ -72,7 +72,7 @@ export default function NumberInputComponent() {
               setPhoneNumber(value);
             }}
             disabled={isSubmitting}
-            className="w-full border-b border-gray-600 text-black bg-gray-100 py-4 px-10 text-2xl text-center placeholder-gray-600 focus:outline-none focus:border-black disabled:opacity-50"
+            className="w-full border-b border-gray-600 text-black bg-gray-100 py-4 px-10 text-lg text-center placeholder-gray-600 focus:outline-none focus:border-black disabled:opacity-50"
           />
           <button
             type="submit"

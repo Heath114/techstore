@@ -4,7 +4,6 @@
 import { ProductList } from '@/app/data/products';
 import { getProductPrice } from '@/app/data/products';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -67,9 +66,9 @@ export default function ProductsSection() {
     }
 
     return (
-        <section className="w-full max-w-[1440px] mx-auto lg:px-0 px-4 pb-40 bg-white" id="deals">
+        <section className="w-full max-w-[1440px] mx-auto px-4 pt-16 md:pt-20 lg:pt-24 pb-12 md:pb-16 lg:pb-20 2xl:pt-0 2xl:pb-40 bg-white" id="deals">
             <div className="">
-                <h3 className="text-2xl 2xl:text-[32px] font-medium text-gray-900 mb-2 tracking-wide">OUR PRODUCTS</h3>
+                <h3 className="text-2xl md:text-3xl lg:text-3xl 2xl:text-[32px] font-medium text-gray-900 mb-2 tracking-wide">OUR PRODUCTS</h3>
                 <div className={styles.filterContainer}>
                     {Object.keys(categoryMap).map((category, index) =>  (
                         <button
@@ -89,11 +88,11 @@ export default function ProductsSection() {
                         }}
                     />
                 </div>
-                <div className="relative">
+                <div className="relative pt-2 2xl:pt-0">
                     <Swiper
                         modules={[Autoplay, Pagination, Navigation]}
                         spaceBetween={10}
-                        slidesPerView={1.6}
+                        slidesPerView={2}
                         slidesPerGroup={1}
                         centeredSlides={false}
                         breakpoints={{
@@ -140,21 +139,21 @@ export default function ProductsSection() {
                                             className="w-full h-full object-contain"
                                         />
                                         {product.isSale && (
-                                            <div className="absolute top-2 left-2 bg-red-700 text-white px-[8px] py-[2px] text-[10px]">
+                                            <div className="absolute top-2 left-2 bg-red-700 text-white px-[6px] py-[1px] text-[8px] 2xl:px-[8px] 2xl:py-[2px] 2xl:text-[10px]">
                                                 ON SALE
                                             </div>
                                         )}
                                     </div>
                                     <div className="text-black font-normal px-2">
-                                        <h4 className="text-base text-gray-700 font-normal">{product.name}</h4>
+                                        <h4 className="text-sm md:text-base lg:text-base text-gray-700 font-normal">{product.name}</h4>
                                         <div className="mt-2">
                                             {product.isSale ? (
                                                 <>
-                                                    <span className="text-sm text-gray-300 line-through">${(product.originalPrice).toFixed(2)}</span>
-                                                    <span className="text-sm text-black text-gray-700 ml-2">{`From $${getProductPrice(product).toFixed(2)}`}</span>
+                                                    <span className="text-xs md:text-sm lg:text-sm text-gray-300 line-through">${(product.originalPrice).toFixed(2)}</span>
+                                                    <span className="text-xs md:text-sm lg:text-sm text-black text-gray-700 ml-2">{`From $${getProductPrice(product).toFixed(2)}`}</span>
                                                 </>
                                             ) : (
-                                                <span className="text-sm text-gray-700">{`From $${getProductPrice(product).toFixed(2)}`}</span>
+                                                <span className="text-xs md:text-sm lg:text-sm text-gray-700">{`From $${getProductPrice(product).toFixed(2)}`}</span>
                                             )}
                                         </div>
                                     </div>

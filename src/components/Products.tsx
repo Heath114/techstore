@@ -32,15 +32,15 @@ export default function ProductsSection() {
     }
 
     return (
-        <section className="w-full max-w-[1440px] mx-auto lg:px-0 px-4 py-16 bg-white"
+        <section className="w-full max-w-[1440px] mx-auto px-4 py-16 md:py-20 lg:py-24 2xl:py-32 bg-white"
  id="deals">
             <div className="">
-                <h3 className="text-2xl 2xl:text-[32px] font-medium text-gray-900 mb-12 tracking-wide">BESTSELLERS</h3>
+                <h3 className="text-2xl md:text-3xl lg:text-3xl 2xl:text-[32px] font-medium text-gray-900 mb-12 tracking-wide">BESTSELLERS</h3>
                 <div className="relative">
                     <Swiper
                         modules={[Autoplay, Pagination, Navigation]}
                         spaceBetween={10}
-                        slidesPerView={1.6}
+                        slidesPerView={2}
                         slidesPerGroup={1}
                         centeredSlides={false}
                         breakpoints={{
@@ -89,23 +89,23 @@ export default function ProductsSection() {
                                         />
                                         {
                                             product.isSale && (
-                                                <div className="absolute top-2 left-2 bg-red-700 text-white px-[8px] py-[2px] text-[10px]">
+                                                <div className="absolute top-2 left-2 bg-red-700 text-white px-[6px] py-[1px] text-[8px] 2xl:px-[8px] 2xl:py-[2px] 2xl:text-[10px]">
                                                     ON SALE
                                                 </div>
                                             )
                                         }
                                     </div>
                                     <div className="text-black font-normal px-2">
-                                        <h4 className="text-base text-gray-700 font-normal">{product.name}</h4>
+                                        <h4 className="text-sm md:text-base lg:text-base text-gray-700 font-normal">{product.name}</h4>
                                         <div className="mt-2">
                                             {product.isSale ? (
                                                 <>
-                                                    <span className="text-sm text-gray-300 line-through">{`$${(product.originalPrice).toFixed(2)}`}</span>
-                                                    <span className="text-sm text-black text-gray-700 ml-2">{`From $${getProductPrice(product).toFixed(2)}`}</span>
+                                                    <span className="text-xs md:text-sm lg:text-sm text-gray-300 line-through">{`$${(product.originalPrice).toFixed(2)}`}</span>
+                                                    <span className="text-xs md:text-sm lg:text-sm text-black text-gray-700 ml-2">{`From $${getProductPrice(product).toFixed(2)}`}</span>
                                                 </>
                                             ) :
                                             (
-                                                <span className="text-sm text-gray-700">{`From $${getProductPrice(product).toFixed(2)}`}</span>
+                                                <span className="text-xs md:text-sm lg:text-sm text-gray-700">{`From $${getProductPrice(product).toFixed(2)}`}</span>
                                             )}
                                         </div>
                                     </div>

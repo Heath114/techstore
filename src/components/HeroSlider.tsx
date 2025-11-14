@@ -73,7 +73,7 @@ function ProHeroSlider() {
           speed={900}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
-          className="h-[calc(70vh-70px)] sm:h-[100vh] 2xl:h-[120vh] pro-swiper"
+          className="h-[calc(70vh-70px)] sm:h-[80vh] md:h-[90vh] lg:h-[100vh] 2xl:h-[120vh] pro-swiper"
         >
           {slides.map((s, i) => (
             <SwiperSlide key={s.id}>
@@ -94,16 +94,16 @@ function ProHeroSlider() {
                 <div className="absolute inset-0 flex items-center">
                   <div className="max-w-7xl mx-auto w-full px-8">
                     <div className="max-w-xl">
-                      <h2 className="text-white text-xl sm:text-2xl lg:text-3xl font-normal 2xl:font-semibold tracking-tight">
+                      <h2 className="text-white text-xl sm:text-2xl md:text-2xl lg:text-3xl 2xl:text-4xl font-normal 2xl:font-semibold tracking-tight">
                         {s.title}
                       </h2>
-                      <p className="mt-3 text-white/90 text-sm sm:text-base lg:text-xl leading-relaxed">
+                      <p className="mt-3 text-white/90 text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-2xl leading-relaxed">
                         {s.subtitle}
                       </p>
                       {s.ctaText && s.ctaHref && (
                         <Link
                           href={s.ctaHref}
-                          className="inline-flex mt-5 items-center bg-white/90 hover:bg-white transition px-6 py-2 2xl:px-12 2xl:py-2.5 2xl:text-xl text-sm font-medium text-gray-900 backdrop-blur"
+                          className="inline-flex mt-5 items-center bg-white/90 hover:bg-white transition px-6 py-2 md:px-8 md:py-2.5 lg:px-10 lg:py-2.5 2xl:px-12 2xl:py-2.5 text-sm md:text-base lg:text-lg 2xl:text-xl font-medium text-gray-900 backdrop-blur"
                         >
                           {s.ctaText}
                         </Link>

@@ -62,12 +62,12 @@ h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea, label, a {
 
 /* Swiper pagination styles */
 .pro-swiper .swiper-pagination-bullet {
-  width: 10px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border-radius: 9999px;
   background: rgba(255,255,255,0.55);
   opacity: 1; 
-  margin: 0 6px !important;
+  margin: 0 4px !important;
   transition: width .28s ease, background .28s ease, transform .28s ease;
 }
 
@@ -77,8 +77,20 @@ h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea, label, a {
 }
 
 .pro-swiper .swiper-pagination-bullet.swiper-pagination-bullet-active {
-  width: 28px;                
+  width: 20px;                
   background: #5d2294;        
+}
+
+@media (min-width: 1536px) {
+  .pro-swiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 12px;
+    margin: 0 6px !important;
+  }
+  
+  .pro-swiper .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    width: 28px;
+  }
 }
 
 

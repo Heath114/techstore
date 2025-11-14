@@ -24,8 +24,8 @@ function AboveFooter() {
     <section className="flex flex-col bg-gray-900 py-8 md:py-12 px-4 md:px-8 lg:px-40 border-b border-gray-800" id="contact">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl md:text-3xl font-medium text-white">Contact Us</h1>
-          <p className="text-sm md:text-base text-gray-400">You can call us any time.</p>
+          <h1 className="text-2xl md:text-3xl font-medium text-gray-400">Contact Us</h1>
+          <p className="text-sm md:text-base text-white">You can call us any time.</p>
         </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 md:gap-4 w-full sm:w-auto">
           <button
@@ -88,7 +88,7 @@ const FooterNav = () => {
           onClick={() => toggleSection('support')}
           className="flex items-center justify-between w-full md:cursor-default"
         >
-          <h3 className="mb-2 uppercase text-gray-400 font-medium text-base md:text-lg tracking-wider">
+          <h3 className="mb-2 uppercase text-gray-400 font-medium text-sm sm:text-base md:text-lg tracking-wider">
             Support
           </h3>
           <span className="md:hidden text-gray-400 text-xl">
@@ -122,7 +122,7 @@ const FooterNav = () => {
           onClick={() => toggleSection('quick')}
           className="flex items-center justify-between w-full md:cursor-default"
         >
-          <h3 className="mb-2 uppercase text-gray-400 font-medium text-base md:text-lg tracking-wider">
+          <h3 className="mb-2 uppercase text-gray-400 font-medium text-sm sm:text-base md:text-lg tracking-wider">
             Quick Links
           </h3>
           <span className="md:hidden text-gray-400 text-xl">
@@ -150,7 +150,7 @@ const FooterNav = () => {
           onClick={() => toggleSection('hours')}
           className="flex items-center justify-between w-full md:cursor-default"
         >
-          <h3 className="mb-2 uppercase text-gray-400 font-medium text-base md:text-lg tracking-wider">
+          <h3 className="mb-2 uppercase text-gray-400 font-medium text-sm sm:text-base md:text-lg tracking-wider">
             Opening Hours
           </h3>
           <span className="md:hidden text-gray-400 text-xl">
@@ -175,33 +175,33 @@ const FooterBottom = () => {
   const { lang } = useParams();
 
   return (
-    <div className={`px-4 md:px-8 w-full flex flex-col gap-6 mt-8 md:mt-12`}>
+    <div className={`px-4 md:px-8 lg:px-12 2xl:px-16 w-full flex flex-col gap-6 mt-8 md:mt-10 lg:mt-12`}>
       {/* Icons Container - Mobile: stacked, Desktop: same row */}
       <div className="flex flex-col md:flex-row items-center md:items-center md:justify-between gap-6">
         {/* Social media icons - left on desktop */}
         <div className='flex bg-gray-800 border border-gray-700'>
           {/** Facebook Icon */}
-          <a href="#" className="w-12 h-12 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
+          <a href="#" className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
             <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
             <FacebookIcon />
           </a>
           {/** Twitter Icon */}
-          <a href="#" className="w-12 h-12 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
+          <a href="#" className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
             <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
             <TwitterIcon />
           </a>
           {/** Instagram Icon */}
-          <a href="#" className="w-12 h-12 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
+          <a href="#" className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
             <InstagramIcon />
           </a>
           {/** WhatsApp Icon */}
-          <a href="#" className="w-12 h-12 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
+          <a href="#" className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center border-r border-gray-700 relative overflow-hidden group">
             <div className="absolute inset-0 bg-green-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
             <WhatsAppIcon />
           </a>
           {/** Phone Icon */}
-          <a href="#" className="w-12 h-12 flex items-center justify-center relative overflow-hidden group">
+          <a href="#" className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center relative overflow-hidden group">
             <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
             <PhoneIcon />
           </a>
@@ -209,27 +209,27 @@ const FooterBottom = () => {
 
         {/* Payment options - right on desktop */}
         <div className='flex bg-gray-800 border border-gray-700'>
-          <div className="w-12 h-12 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
+          <div className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
             <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             <VisaIcon />
           </div>
-          <div className="w-12 h-12 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
+          <div className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
             <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             <MastercardIcon />
           </div>
-          <div className="w-12 h-12 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
+          <div className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
             <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             <PayPalIcon />
           </div>
-          <div className="w-12 h-12 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
+          <div className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
             <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             <ApplePayIcon />
           </div>
-          <div className="w-12 h-12 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
+          <div className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center border-r border-gray-700 cursor-pointer relative overflow-hidden group">
             <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             <AmexIcon />
           </div>
-          <div className="w-12 h-12 flex items-center justify-center cursor-pointer relative overflow-hidden group">
+          <div className="w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14 flex items-center justify-center cursor-pointer relative overflow-hidden group">
             <div className="absolute inset-0 bg-gray-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             <GooglePayIcon />
           </div>
@@ -237,7 +237,7 @@ const FooterBottom = () => {
       </div>
 
       {/* Copyright text - absolute bottom */}
-      <div className="text-sm text-gray-400 text-center mt-8 pb-4">
+      <div className="text-sm md:text-base lg:text-base text-gray-400 text-center mt-8 md:mt-10 lg:mt-12 pb-4">
         © {new Date().getFullYear()} TechStore. All rights reserved.
       </div>
     </div>
@@ -264,22 +264,7 @@ export default function StickyFooter() {
   return (
     <>
       <AboveFooter />
-      {/* Mobile: Simple footer, Desktop: Sticky footer */}
-      <div className="md:hidden">
-        <FooterContent />
-      </div>
-      <div className="hidden md:block">
-        <div
-          className="relative h-[500px]"
-          style={{ clipPath: 'polygon(0% 0, 100% 0%, 100% 100%, 0 100%)' }}
-        >
-          <div className="relative h-[calc(100vh+500px)] -top-[100vh]">
-            <div className="sticky z-10 top-[calc(100vh-500px)] h-[500px]">
-              <FooterContent />
-            </div>
-          </div>
-        </div>
-      </div>
+      <FooterContent />
     </>
   );
 }

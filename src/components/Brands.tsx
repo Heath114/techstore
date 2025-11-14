@@ -10,9 +10,9 @@ import 'swiper/css/autoplay';
 
 export default function BrandsSection() {
   return (
-    <section className="w-full max-w-[1440px] mx-auto lg:px-0 px-4 py-16 md:py-24 lg:py-32 2xl:py-40 bg-white">
-      <div className="mb-8 md:mb-10 2xl:mb-12 text-center">
-        <h2 className="text-2xl 2xl:text-[32px] font-medium text-gray-900 tracking-wide">
+    <section className="w-full max-w-[1440px] mx-auto px-4 py-16 md:py-24 lg:py-32 2xl:py-40 bg-white">
+      <div className="mb-8 md:mb-10 lg:mb-11 2xl:mb-12 text-center">
+        <h2 className="text-2xl md:text-3xl lg:text-3xl 2xl:text-[32px] font-medium text-gray-900 tracking-wide">
           Shop from {BrandList.length}+ Trusted Brands
         </h2>
       </div>

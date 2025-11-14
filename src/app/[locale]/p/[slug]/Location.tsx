@@ -14,7 +14,7 @@ export default function Location() {
     return (
         <section className="w-full max-w-[1440px] mx-auto lg:px-0 px-4 py-24 bg-white" id="location">
             <div className="text-center mb-8">
-                <h3 className="text-4xl text-gray-900 mb-12 text-center">Visit Our Store</h3>
+                <h3 className="2xl:text-4xl text-2xl text-gray-900 mb-12 text-center">Visit Our Store</h3>
             </div>
             <div className="w-full h-[600px] my-10">
                 <iframe
