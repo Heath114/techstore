@@ -5,6 +5,7 @@ import localFont from 'next/font/local'
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LenisScroll from '@/components/LenisScroll';
+import { CartProvider } from '@/context/CartContext';
 
 // Load Neue Montreal font family as the global font
 const neueMontrealFont = localFont({
@@ -68,10 +69,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={neueMontrealFont.variable} suppressHydrationWarning>
       <body className={neueMontrealFont.className} suppressHydrationWarning>
-        <LenisScroll />
-        <Header />
-        <div className="min-h-[calc(100vh)]">{children}</div>
-        <Footer />
+        <CartProvider>
+          <LenisScroll />
+          <Header />
+          <div className="min-h-[calc(100vh)]">{children}</div>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

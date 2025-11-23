@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { getColorObjects } from '@/lib/colorMap';
 import { Cross } from 'lucide-react';
 import router from 'next/router';
+import { useCart } from '@/context/CartContext';
+import { useParams } from 'next/navigation';
 import { 
   FacebookIcon, 
   InstagramIcon, 
@@ -126,6 +128,9 @@ type ProductShowcaseProps = {
 export function ProductShowcase({ product }: ProductShowcaseProps) {
   const [selectedColor, setSelectedColor] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
+  const params = useParams();
+  const locale = params.locale || 'en';
   
   // Get colors from product data or use defaults
   const colors = product.colors && product.colors.length > 0 
@@ -174,7 +179,6 @@ export function ProductShowcase({ product }: ProductShowcaseProps) {
     }
   };
 
-  const locale = 'en'; // Replace with actual locale logic if needed
   
   return (
     <div className="py-12 md:py-24 lg:py-32 pt-16 md:pt-20 lg:pt-24">
@@ -284,6 +288,24 @@ export function ProductShowcase({ product }: ProductShowcaseProps) {
             </div>
 
             {/* Contact Buttons */}
+            <div className="flex gap-3 mb-6">
+              <button
+                onClick={() => {
+                  addToCart({
+                    id: `${product.id}-${colors[selectedColor]?.name || 'default'}`,
+                    name: product.name,
+                    price: getProductPrice(product),
+                    image: product.image ?? '/images/products/placeholder.png',
+                    slug: product.slug || '',
+                    selectedColor: colors[selectedColor]?.name,
+                  });
+                }}
+                className="flex-1 bg-gray-900 text-white py-3 px-6 font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={product.inStock === false}
+              >
+                Add to Cart
+              </button>
+            </div>
             <ContactButtons productName={product.name} />
             
             {/**Available Section */}

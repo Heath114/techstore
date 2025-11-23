@@ -3,14 +3,18 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Search, X, Menu, ChevronRight } from 'lucide-react';
+import { Phone, Search, X, Menu, ChevronRight, ShoppingCart } from 'lucide-react';
 import { ProductList } from '@/app/data/products'; 
 import type { Product } from '@/app/data/products';
 import { useParams } from 'next/navigation';
+import { useCart } from '@/context/CartContext';
 
 export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { totalItems } = useCart();
+  const params = useParams();
+  const lang = params.locale || 'en';
 
   return (
     // The header is fixed to the top of the viewport.
@@ -37,6 +41,7 @@ export default function Header() {
         </Link>
         {/* Right: Language & Call */}
         <div className="flex items-center  gap-2">
+          <CartButton totalItems={totalItems} lang={lang} />
           <LanguageButton />
           <CallUsButton />
         </div>
@@ -67,6 +72,7 @@ export default function Header() {
 
         {/* Right: Call Button */}
         <div className="flex items-center justify-end gap-3">
+          <CartButton totalItems={totalItems} lang={lang} />
           <LanguageButton />
           <CallUsButton />
         </div>
@@ -355,6 +361,23 @@ function MenuButton({ onClick }: { onClick: () => void }) {
     >
       <Menu size={24} />
     </button>
+  );
+}
+
+function CartButton({ totalItems, lang }: { totalItems: number; lang: string }) {
+  return (
+    <Link
+      href={`/${lang}/cart`}
+      aria-label="Shopping cart"
+      className="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 bg-white text-gray-900 rounded-md transition-all duration-300 hover:bg-gray-50 hover:shadow-lg relative"
+    >
+      <ShoppingCart size={24} />
+      {totalItems > 0 && (
+        <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+          {totalItems > 9 ? '9+' : totalItems}
+        </span>
+      )}
+    </Link>
   );
 }
 
