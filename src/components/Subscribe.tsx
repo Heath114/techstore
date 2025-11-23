@@ -3,24 +3,30 @@
 import React from 'react'
 import { collection, doc, addDoc, query, where, getDocs, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { useParams } from 'next/navigation';
+import { getTranslations } from '@/lib/i18n';
+import { Locale } from '@/locales/business-config';
 
 
 export default function NumberInputComponent() {
     const [phoneNumber, setPhoneNumber] = React.useState('');
     const [isSubmitting, setIsSubmitting] = React.useState(false);
     const [message, setMessage] = React.useState('');
+    const params = useParams();
+    const locale = (params.locale as Locale) || 'en';
+    const t = getTranslations(locale, 'common');
   
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       
       // Validation
       if (!phoneNumber.trim()) {
-        setMessage('Please enter a phone number');
+        setMessage(t.subscribe.error_empty);
         return;
       }
       
       if (phoneNumber.length < 10) {
-        setMessage('Please enter a valid phone number (at least 10 digits)');
+        setMessage(t.subscribe.error_invalid);
         return;
       }
   
@@ -41,7 +47,7 @@ export default function NumberInputComponent() {
           status: 'active'
         }, { merge: true });
         
-        setMessage('Success! You are now subscribed to our deals list.');
+        setMessage(t.subscribe.success);
         setPhoneNumber('');
         
         // Optional: Log success to console for debugging
@@ -49,7 +55,7 @@ export default function NumberInputComponent() {
         
       } catch (error) {
         console.error('Error adding subscriber:', error);
-        setMessage('Something went wrong. Please try again.');
+        setMessage(t.subscribe.error_general);
       } finally {
         setIsSubmitting(false);
       }
@@ -58,13 +64,13 @@ export default function NumberInputComponent() {
     return (
       <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full max-w-sm mb-4">
         <h3 className={`mb-2 sm:mb-4 uppercase text-gray-400 font-semibold lg:text-4xl`}>
-          Join our Deals List
+          {t.subscribe.title}
         </h3>
-        <h4 className="mb-4 md:mb-6 text-gray-400 font-medium">Join our email list for exclusive offers and early access to sales.</h4>
+        <h4 className="mb-4 md:mb-6 text-gray-400 font-medium">{t.subscribe.subtitle}</h4>
         <div className="relative w-full">
           <input
             type="tel"
-            placeholder="Enter phone number"
+            placeholder={t.subscribe.phone_placeholder}
             value={phoneNumber}
             onChange={(e) => {
               // Only allow numbers and common phone characters

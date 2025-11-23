@@ -9,6 +9,8 @@ import { useRouter, useParams } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import React from 'react';
+import { getTranslations } from '@/lib/i18n';
+import { Locale } from '@/locales/business-config';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -20,7 +22,8 @@ export default function ProductsSection() {
     const [disableSwiper, setDisableSwiper] = React.useState(false);
     const router = useRouter();
     const params = useParams();
-    const lang = params?.locale as string || 'en';
+    const locale = (params.locale as Locale) || 'en';
+    const t = getTranslations(locale, 'common');
     
     React.useEffect(() => {
         setMounted(true);
@@ -35,7 +38,7 @@ export default function ProductsSection() {
         <section className="w-full max-w-[1440px] mx-auto px-4 py-16 md:py-20 lg:py-24 2xl:py-32 bg-white"
  id="deals">
             <div className="">
-                <h3 className="text-2xl md:text-3xl lg:text-3xl 2xl:text-[32px] font-medium text-gray-900 mb-12 tracking-wide">BESTSELLERS</h3>
+                <h3 className="text-2xl md:text-3xl lg:text-3xl 2xl:text-[32px] font-medium text-gray-900 mb-12 tracking-wide">{t.products.bestsellers}</h3>
                 <div className="relative">
                     <Swiper
                         modules={[Autoplay, Pagination, Navigation]}
@@ -77,20 +80,31 @@ export default function ProductsSection() {
                                     className=" hover:shadow-md
                                      cursor-pointer group flex flex-col transition-all duration-300
                                       h-full w-full border-r border-neutral-200 last:border-r-0"
-                                    onClick={() => router.push(`/${lang}/p/${product.slug}`)}
+                                    onClick={() => router.push(`/${locale}/p/${product.slug}`)}
                                 >
-                                <div className="aspect-[4/5] w-full bg-gray-50 flex items-center justify-center overflow-hidden mb-2">
+                                <div className="aspect-[4/5] w-full bg-gray-50 flex items-center justify-center overflow-hidden mb-2 relative">
+                                        {/* Main Image */}
                                         <Image
                                             src={product.image ?? '/images/products/placeholder.png'}
                                             alt={product.name}
                                             width={500}
                                             height={600}
-                                            className="w-full h-full object-contain"
+                                            className="w-full h-full object-contain transition-opacity duration-500 ease-in-out group-hover:opacity-0"
                                         />
+                                        {/* Hover Image - shows hoverImage if available */}
+                                        {product.hoverImage && (
+                                            <Image
+                                                src={product.hoverImage}
+                                                alt={`${product.name} - alternate view`}
+                                                width={500}
+                                                height={600}
+                                                className="w-full h-full object-contain absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100"
+                                            />
+                                        )}
                                         {
                                             product.isSale && (
-                                                <div className="absolute top-2 left-2 bg-red-700 text-white px-[6px] py-[1px] text-[8px] 2xl:px-[8px] 2xl:py-[2px] 2xl:text-[10px]">
-                                                    ON SALE
+                                                <div className="absolute top-2 left-2 bg-red-700 text-white px-[6px] py-[1px] text-[8px] 2xl:px-[8px] 2xl:py-[2px] 2xl:text-[10px] z-10">
+                                                    {t.products.on_sale}
                                                 </div>
                                             )
                                         }
@@ -101,11 +115,11 @@ export default function ProductsSection() {
                                             {product.isSale ? (
                                                 <>
                                                     <span className="text-xs md:text-sm lg:text-sm text-gray-300 line-through">{`$${(product.originalPrice).toFixed(2)}`}</span>
-                                                    <span className="text-xs md:text-sm lg:text-sm text-black text-gray-700 ml-2">{`From $${getProductPrice(product).toFixed(2)}`}</span>
+                                                    <span className="text-xs md:text-sm lg:text-sm text-black text-gray-700 ml-2">{`${t.products.from} $${getProductPrice(product).toFixed(2)}`}</span>
                                                 </>
                                             ) :
                                             (
-                                                <span className="text-xs md:text-sm lg:text-sm text-gray-700">{`From $${getProductPrice(product).toFixed(2)}`}</span>
+                                                <span className="text-xs md:text-sm lg:text-sm text-gray-700">{`${t.products.from} $${getProductPrice(product).toFixed(2)}`}</span>
                                             )}
                                         </div>
                                     </div>

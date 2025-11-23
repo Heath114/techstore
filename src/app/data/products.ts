@@ -4,7 +4,8 @@ interface BaseProduct {
     name: string;
     description?: string;
     image?: string;
-    images: string[];
+    hoverImage?: string; // Image shown on hover
+    images: string[]; // Gallery images for product detail page
     inStock?: boolean;
     stock?: number;
     category?: string;
@@ -385,8 +386,6 @@ export const ProductList: Product[] = [
 
 
 
-
-
 export interface Brand {
     id: number;
     name: string;
@@ -438,3 +437,5 @@ export const BrandList: Brand[] = [
         website: "https://www.mi.com"
     }
 ];
+
+

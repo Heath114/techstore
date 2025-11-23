@@ -2,6 +2,9 @@
 'use client';
 import React from 'react';
 import { Headphones, PackageSearch, RefreshCcw, BadgeDollarSign, Wallet  } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { getTranslations } from '@/lib/i18n';
+import { Locale } from '@/locales/business-config';
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -26,31 +29,35 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) =
 };
 
 const WhyChooseUs: React.FC = () => {
+  const params = useParams();
+  const locale = (params.locale as Locale) || 'en';
+  const t = getTranslations(locale, 'common');
+  
   const features = [
     {
       icon: <Headphones className="w-6 h-6 text-white" />,
-      title: "Excellent customer service",
-      description: "Support team ready to answer all your questions and assist you."
+      title: t.why.customer_service.title,
+      description: t.why.customer_service.description
     },
     {
       icon: <PackageSearch className="w-6 h-6 text-white" />,
-      title: "Track your order with ease",
-      description: "Stay informed on the status of your question one step closer to getting it resolved."
+      title: t.why.track_order.title,
+      description: t.why.track_order.description
     },
     {
       icon: <RefreshCcw className="w-6 h-6 text-white" />,
-      title: "Easy returns and exchanges",
-      description: "We offer a flexible return and exchange policy to ensure your complete satisfaction."
+      title: t.why.returns.title,
+      description: t.why.returns.description
     },
     {
       icon: <BadgeDollarSign className="w-6 h-6 text-white" />,
-      title: "Best offers and prices",
-      description: "Discover unique products at the lowest prices with quality assurance."
+      title: t.why.best_offers.title,
+      description: t.why.best_offers.description
     },
     {
       icon: <Wallet className="w-6 h-6 text-white" />,
-      title: "Various payment options",
-      description: "Enjoy flexible payment methods that suit your needs and make your purchases easier."
+      title: t.why.payment.title,
+      description: t.why.payment.description
     }
   ];
 
@@ -58,7 +65,7 @@ const WhyChooseUs: React.FC = () => {
     <section className="pb-16 mb-12 md:pb-20 lg:pb-24 2xl:pb-16 pt-16 md:pt-20 lg:pt-24 2xl:pt-16 w-[90%] md:w-[96%] lg:w-[80%] 2xl:w-[75%] mx-auto my-0 md:my-8 lg:my-12 2xl:my-16 bg-gray-50 border border-gray-200">
       <div className="max-w-7xl mx-auto px-8">
         <h2 className="text-xl md:text-2xl lg:text-2xl 2xl:text-3xl font-medium text-gray-900 mb-12 text-center tracking-wide">
-          Why choose to buy from This Techshop?
+          {t.why.title}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-7 lg:gap-8">
           {features.map((feature, index) => (
@@ -76,3 +83,4 @@ const WhyChooseUs: React.FC = () => {
 };
 
 export default WhyChooseUs;
+

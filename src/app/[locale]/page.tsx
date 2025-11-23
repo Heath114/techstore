@@ -5,8 +5,12 @@ import Products2 from '@/components/Products2';
 import BrandsSection from '@/components/Brands';
 import WhyChooseUs from '@/components/Why';
 import ImageSection from '@/components/Image';
+import { Locale } from '@/locales/business-config';
+import { getLocaleFromParams } from '@/lib/locale-utils';
 
-export default function Page() {
+export default function Page({ params }: { params: { locale: string } }) {
+  const locale = getLocaleFromParams(params);
+  
   return (
     <main className="relative">
       {/* Left alignment guide line
